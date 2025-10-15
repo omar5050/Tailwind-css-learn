@@ -5,6 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitPro - Personal Training</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#e8f5e9',
+                            100: '#c8e6c9',
+                            200: '#a5d6a7',
+                            300: '#81c784',
+                            400: '#66bb6a',
+                            500: '#21692B',
+                            600: '#1d5e26',
+                            700: '#195221',
+                            800: '#14461c',
+                            900: '#0f3a17',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
@@ -19,14 +42,14 @@
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, #f97316 0%, #dc2626 100%);
+            background: linear-gradient(135deg, #21692B 0%, #0f3a17 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .hero-gradient {
-            background: linear-gradient(135deg, #f97316 0%, #dc2626 100%);
+            background: linear-gradient(135deg, #21692B 0%, #0f3a17 100%);
         }
 
         @media (max-width: 768px) {
@@ -41,30 +64,34 @@
         }
     </style>
 </head>
-<!-- <img src="omar.jpg" alt=""> -->
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white scroll-smooth">
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm shadow-md">
+    <nav id="navBar" class="fixed w-full z-50 bg-transparent text-white">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
-                <div class="text-2xl font-bold gradient-text">FitPro</div>
-
+                <div class="w-20">
+                    <a href="#home">
+                        <img id="logo" src="images/logo-removebg-preview.png" class="w-full" alt="logo">
+                    </a>
+                </div>
+                
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center gap-8">
-                    <a href="#home" class="nav-link hover:text-orange-600 dark:hover:text-orange-400">Home</a>
-                    <a href="#about" class="nav-link hover:text-orange-600 dark:hover:text-orange-400">About</a>
-                    <a href="#services" class="nav-link hover:text-orange-600 dark:hover:text-orange-400">Services</a>
-                    <a href="#testimonials" class="nav-link hover:text-orange-600 dark:hover:text-orange-400">Testimonials</a>
-                    <a href="#transform" class="nav-link hover:text-orange-600 dark:hover:text-orange-400">Transformations</a>
+                    <a href="#home" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Home</a>
+                    <a href="#about" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">About</a>
+                    <a href="#services" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Services</a>
+                    <a href="#testimonials" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Testimonials</a>
+                    <!-- <a href="#transform" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Transformations</a> -->
                 </div>
 
                 <!-- Language & Dark Mode Toggle -->
                 <div class="flex items-center gap-4">
-                    <button id="langToggle" class="px-3 py-1 rounded-lg bg-orange-600 text-white hover:bg-orange-700">
+                    <button id="langToggle" class="px-3 py-1 rounded-lg bg-primary-500 text-white hover:bg-primary-600">
                         عربي
                     </button>
-                    <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700">
+                    <button id="darkModeToggle" class="p-2 rounded-lg dark:bg-gray-700">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
                             <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
@@ -83,19 +110,18 @@
             <!-- Mobile Menu -->
             <div id="mobileMenu" class="mobile-menu md:hidden">
                 <div class="flex flex-col gap-4 pt-4 pb-2">
-                    <a href="#home" class="nav-link hover:text-orange-600 dark:hover:text-orange-400">Home</a>
-                    <a href="#about" class="nav-link hover:text-orange-600 dark:hover:text-orange-400">About</a>
-                    <a href="#services" class="nav-link hover:text-orange-600 dark:hover:text-orange-400">Services</a>
-                    <a href="#testimonials" class="nav-link hover:text-orange-600 dark:hover:text-orange-400">Testimonials</a>
-                    <a href="#transform" class="nav-link hover:text-orange-600 dark:hover:text-orange-400">Transformations</a>
+                    <a href="#home" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Home</a>
+                    <a href="#about" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">About</a>
+                    <a href="#services" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Services</a>
+                    <a href="#testimonials" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Testimonials</a>
+                    <!-- <a href="#transform" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Transformations</a> -->
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Fixed Social Sidebar -->
-    <div id="socialSidebar" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex gap-4 
-         lg:bottom-auto md:left-auto md:right-6 md:top-1/2 md:-translate-y-1/2 md:-translate-x-0  transition-opacity duration-300 ">
+    <div id="socialSidebar" class=" hidden md:block fixed md:z-50 md:left-auto md:right-6 md:top-1/2 md:-translate-y-1/2 md:-translate-x-0 transition-opacity duration-300 opacity-0">
         <div class="flex md:flex-col gap-4">
             <a href="https://wa.me/1234567890" target="_blank" class="w-12 h-12 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -115,9 +141,18 @@
         </div>
     </div>
 
+    <!-- show only mobile scree -->
+    <div id="socialMobile" class="md:hidden opacity-0 transition delay-150 duration-300 ease-in-out fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-3xl">        
+        <a href="https://wa.me/01022333129" target="_blank" class="flex justify-center items-center m-auto w-full px-8 py-4 bg-primary-500 text-white rounded-lg font-bold text-sm sm:text-lg hover:bg-primary-800 transform hover:scale-105 transition footer-cta rounded-2xl">
+            <svg class="h-4 sm:h-6 me-[10px]" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+            Start Today</a>
+    </div>
+
     <!-- Hero Section -->
-    <section id="home" class="pt-20 min-h-screen flex items-center hero-gradient">
-        <div class="container mx-auto px-4 py-20">
+    <section id="home" class="bg-[url(images/test.jpg)] bg-cover bg-center min-h-screen flex items-center">
+        <div class="container mx-auto px-4 py-40">
             <div class="max-w-4xl mx-auto text-center text-white">
                 <h1 class="text-5xl md:text-7xl font-bold mb-6 hero-title">
                     Transform Your Body, Transform Your Life
@@ -125,17 +160,26 @@
                 <p class="text-xl md:text-2xl mb-8 hero-subtitle">
                     Achieve your fitness goals with personalized training programs designed just for you
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                    <button class="px-8 py-4 bg-white text-orange-600 rounded-lg font-bold text-lg hover:bg-gray-100 transform hover:scale-105 transition cta-primary">
+                <div class="w-[30px] h-[90px] flex justify-center items-end mx-auto rounded-[11px] border border-solid border-white/50 shadow-lg">
+                     <!-- Updated down arrow SVG -->
+                      <a href="#about">                    
+                        <svg class="size-6 h-10 mx-auto animate-bounce text-white drop-shadow-lg" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                      </svg>
+                      </a>
+                   
+                    <!-- commnet fir now -->
+                    <!-- <button class="px-8 py-4 bg-white text-primary-500 rounded-lg font-bold text-lg hover:bg-gray-100 
+                     hover:scale-105 transition cta-primary">
                         Start Your Journey
                     </button>
-                    <button class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-bold text-lg hover:bg-white hover:text-orange-600 transform hover:scale-105 transition cta-secondary">
+                    <button class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-bold text-lg hover:bg-white hover:text-primary-500 transform hover:scale-105 transition cta-secondary">
                         View Programs
-                    </button>
+                    </button> -->
                 </div>
                 
                 <!-- Social Links in Hero -->
-                <div class="flex gap-6 justify-center items-center">
+                <div class="flex gap-6 justify-center items-center my-5">
                     <a href="https://wa.me/1234567890" target="_blank" class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transform hover:scale-110 transition">
                         <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
@@ -162,7 +206,9 @@
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 about-title">About Me</h2>
             <div class="max-w-4xl mx-auto">
                 <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="aspect-square bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl"></div>
+                    <div class="aspect-[.8/1]">
+                        <img src="images/cover.jfif" alt="about me" class="w-full h-full object-cover rounded-2xl shadow-lg">
+                    </div>
                     <div>
                         <h3 class="text-2xl font-bold mb-4 about-subtitle">Your Fitness Partner</h3>
                         <p class="text-lg mb-4 about-text">
@@ -173,13 +219,13 @@
                         </p>
                         <div class="flex flex-wrap gap-4">
                             <div class="flex items-center gap-2">
-                                <svg class="w-6 h-6 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-6 h-6 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                                 </svg>
                                 <span class="cert">Certified Trainer</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <svg class="w-6 h-6 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-6 h-6 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                                 </svg>
                                 <span class="cert">Nutrition Specialist</span>
@@ -198,7 +244,7 @@
             <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <!-- Service 1 -->
                 <div class="p-8 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:shadow-xl transform hover:-translate-y-2 transition">
-                    <div class="w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center mb-6">
+                    <div class="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>
@@ -211,7 +257,7 @@
 
                 <!-- Service 2 -->
                 <div class="p-8 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:shadow-xl transform hover:-translate-y-2 transition">
-                    <div class="w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center mb-6">
+                    <div class="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                         </svg>
@@ -224,7 +270,7 @@
 
                 <!-- Service 3 -->
                 <div class="p-8 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:shadow-xl transform hover:-translate-y-2 transition">
-                    <div class="w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center mb-6">
+                    <div class="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
@@ -249,13 +295,13 @@
                         <div class="relative mb-4 rounded-xl overflow-hidden">
                             <div class="grid grid-cols-2 gap-2">
                                 <div class="aspect-square bg-gradient-to-br from-gray-300 to-gray-500"></div>
-                                <div class="aspect-square bg-gradient-to-br from-orange-400 to-red-600"></div>
+                                <div class="aspect-square bg-gradient-to-br from-primary-400 to-primary-700"></div>
                             </div>
                             <div class="absolute top-2 left-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">Before</div>
                             <div class="absolute top-2 right-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">After</div>
                         </div>
                         <div class="flex items-center gap-4 mb-4">
-                            <div class="w-16 h-16 bg-orange-600 rounded-full"></div>
+                            <div class="w-16 h-16 bg-primary-500 rounded-full"></div>
                             <div>
                                 <h4 class="font-bold text-lg client-name">Sarah Johnson</h4>
                                 <div class="flex text-yellow-400 text-sm">★★★★★</div>
@@ -264,7 +310,7 @@
                         <p class="text-gray-600 dark:text-gray-300 testimonial-text mb-4">
                             "Amazing results in just 3 months! I've lost 20 pounds and gained so much confidence."
                         </p>
-                        <button class="text-orange-600 font-semibold hover:text-orange-700">View Full Story →</button>
+                        <button class="text-primary-500 font-semibold hover:text-primary-600">View Full Story →</button>
                     </div>
 
                     <!-- Success Story 2 -->
@@ -272,13 +318,13 @@
                         <div class="relative mb-4 rounded-xl overflow-hidden">
                             <div class="grid grid-cols-2 gap-2">
                                 <div class="aspect-square bg-gradient-to-br from-gray-400 to-gray-600"></div>
-                                <div class="aspect-square bg-gradient-to-br from-orange-500 to-red-600"></div>
+                                <div class="aspect-square bg-gradient-to-br from-primary-500 to-primary-800"></div>
                             </div>
                             <div class="absolute top-2 left-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">Before</div>
                             <div class="absolute top-2 right-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">After</div>
                         </div>
                         <div class="flex items-center gap-4 mb-4">
-                            <div class="w-16 h-16 bg-orange-600 rounded-full"></div>
+                            <div class="w-16 h-16 bg-primary-500 rounded-full"></div>
                             <div>
                                 <h4 class="font-bold text-lg client-name">Mike Chen</h4>
                                 <div class="flex text-yellow-400 text-sm">★★★★★</div>
@@ -287,7 +333,7 @@
                         <p class="text-gray-600 dark:text-gray-300 testimonial-text mb-4">
                             "The personalized approach made all the difference. I finally achieved the body I've always wanted!"
                         </p>
-                        <button class="text-orange-600 font-semibold hover:text-orange-700">View Full Story →</button>
+                        <button class="text-primary-500 font-semibold hover:text-primary-600">View Full Story →</button>
                     </div>
 
                     <!-- Success Story 3 -->
@@ -295,13 +341,13 @@
                         <div class="relative mb-4 rounded-xl overflow-hidden">
                             <div class="grid grid-cols-2 gap-2">
                                 <div class="aspect-square bg-gradient-to-br from-gray-300 to-gray-500"></div>
-                                <div class="aspect-square bg-gradient-to-br from-orange-400 to-red-500"></div>
+                                <div class="aspect-square bg-gradient-to-br from-primary-400 to-primary-600"></div>
                             </div>
                             <div class="absolute top-2 left-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">Before</div>
                             <div class="absolute top-2 right-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">After</div>
                         </div>
                         <div class="flex items-center gap-4 mb-4">
-                            <div class="w-16 h-16 bg-orange-600 rounded-full"></div>
+                            <div class="w-16 h-16 bg-primary-500 rounded-full"></div>
                             <div>
                                 <h4 class="font-bold text-lg client-name">Emma Davis</h4>
                                 <div class="flex text-yellow-400 text-sm">★★★★★</div>
@@ -310,7 +356,7 @@
                         <p class="text-gray-600 dark:text-gray-300 testimonial-text mb-4">
                             "Professional, knowledgeable, and motivating. Couldn't ask for a better trainer!"
                         </p>
-                        <button class="text-orange-600 font-semibold hover:text-orange-700">View Full Story →</button>
+                        <button class="text-primary-500 font-semibold hover:text-primary-600">View Full Story →</button>
                     </div>
 
                     <!-- Success Story 4 -->
@@ -318,13 +364,13 @@
                         <div class="relative mb-4 rounded-xl overflow-hidden">
                             <div class="grid grid-cols-2 gap-2">
                                 <div class="aspect-square bg-gradient-to-br from-gray-400 to-gray-600"></div>
-                                <div class="aspect-square bg-gradient-to-br from-orange-500 to-red-700"></div>
+                                <div class="aspect-square bg-gradient-to-br from-primary-500 to-primary-900"></div>
                             </div>
                             <div class="absolute top-2 left-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">Before</div>
                             <div class="absolute top-2 right-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">After</div>
                         </div>
                         <div class="flex items-center gap-4 mb-4">
-                            <div class="w-16 h-16 bg-orange-600 rounded-full"></div>
+                            <div class="w-16 h-16 bg-primary-500 rounded-full"></div>
                             <div>
                                 <h4 class="font-bold text-lg client-name">John Smith</h4>
                                 <div class="flex text-yellow-400 text-sm">★★★★★</div>
@@ -333,7 +379,7 @@
                         <p class="text-gray-600 dark:text-gray-300 testimonial-text mb-4">
                             "Life-changing experience! The training and nutrition plans are exactly what I needed."
                         </p>
-                        <button class="text-orange-600 font-semibold hover:text-orange-700">View Full Story →</button>
+                        <button class="text-primary-500 font-semibold hover:text-primary-600">View Full Story →</button>
                     </div>
                 </div>
 
@@ -394,7 +440,7 @@
 
                 <!-- Client Info -->
                 <div class="flex items-center gap-4 mb-6">
-                    <div class="w-20 h-20 bg-orange-600 rounded-full"></div>
+                    <div class="w-20 h-20 bg-primary-500 rounded-full"></div>
                     <div>
                         <h3 id="modalClientName" class="text-2xl font-bold mb-1">Sarah Johnson</h3>
                         <div class="flex text-yellow-400">★★★★★</div>
@@ -404,15 +450,15 @@
                 <!-- Success Details -->
                 <div class="grid md:grid-cols-3 gap-4 mb-6">
                     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl text-center">
-                        <div class="text-3xl font-bold text-orange-600" id="modalWeight">-20 lbs</div>
+                        <div class="text-3xl font-bold text-primary-500" id="modalWeight">-20 lbs</div>
                         <div class="text-sm text-gray-600 dark:text-gray-400">Weight Lost</div>
                     </div>
                     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl text-center">
-                        <div class="text-3xl font-bold text-orange-600" id="modalDuration">3 months</div>
+                        <div class="text-3xl font-bold text-primary-500" id="modalDuration">3 months</div>
                         <div class="text-sm text-gray-600 dark:text-gray-400">Duration</div>
                     </div>
                     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl text-center">
-                        <div class="text-3xl font-bold text-orange-600" id="modalProgram">Full Body</div>
+                        <div class="text-3xl font-bold text-primary-500" id="modalProgram">Full Body</div>
                         <div class="text-sm text-gray-600 dark:text-gray-400">Program</div>
                     </div>
                 </div>
@@ -426,7 +472,7 @@
                 </div>
 
                 <!-- CTA -->
-                <button class="w-full py-4 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl font-bold text-lg hover:from-orange-600 hover:to-red-700 transition">
+                <button class="w-full py-4 bg-gradient-to-r from-primary-500 to-primary-800 text-white rounded-xl font-bold text-lg hover:from-primary-600 hover:to-primary-900 transition">
                     Start Your Transformation
                 </button>
             </div>
@@ -434,11 +480,11 @@
     </div>
 
     <!-- Transformations Section -->
-    <section id="transform" class="py-20 bg-white dark:bg-gray-900">
+    <!-- <section id="transform" class="py-20 bg-white dark:bg-gray-900">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 transform-title">Incredible Transformations</h2>
             <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Transformation 1 -->
+                
                 <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition">
                     <div class="relative">
                         <div class="grid grid-cols-2">
@@ -454,12 +500,12 @@
                     </div>
                 </div>
 
-                <!-- Transformation 2 -->
+                
                 <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition">
                     <div class="relative">
                         <div class="grid grid-cols-2">
                             <div class="aspect-square bg-gradient-to-br from-gray-400 to-gray-600"></div>
-                            <div class="aspect-square bg-gradient-to-br from-orange-400 to-red-600"></div>
+                            <div class="aspect-square bg-gradient-to-br from-primary-400 to-primary-700"></div>
                         </div>
                         <div class="absolute top-4 left-4 bg-white dark:bg-gray-800 px-3 py-1 rounded-full text-sm font-bold before-label">Before</div>
                         <div class="absolute top-4 right-4 bg-white dark:bg-gray-800 px-3 py-1 rounded-full text-sm font-bold after-label">After</div>
@@ -470,12 +516,12 @@
                     </div>
                 </div>
 
-                <!-- Transformation 3 -->
+                
                 <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition">
                     <div class="relative">
                         <div class="grid grid-cols-2">
                             <div class="aspect-square bg-gradient-to-br from-gray-300 to-gray-500"></div>
-                            <div class="aspect-square bg-gradient-to-br from-orange-500 to-red-600"></div>
+                            <div class="aspect-square bg-gradient-to-br from-primary-500 to-primary-800"></div>
                         </div>
                         <div class="absolute top-4 left-4 bg-white dark:bg-gray-800 px-3 py-1 rounded-full text-sm font-bold before-label">Before</div>
                         <div class="absolute top-4 right-4 bg-white dark:bg-gray-800 px-3 py-1 rounded-full text-sm font-bold after-label">After</div>
@@ -487,14 +533,14 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Footer CTA -->
     <section class="py-20 hero-gradient">
         <div class="container mx-auto px-4 text-center text-white">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 footer-title">Ready to Start Your Transformation?</h2>
             <p class="text-xl mb-8 footer-subtitle">Join hundreds of satisfied clients who achieved their dream bodies</p>
-            <button class="px-8 py-4 bg-white text-orange-600 rounded-lg font-bold text-lg hover:bg-gray-100 transform hover:scale-105 transition footer-cta">
+            <button class="px-8 py-4 bg-white text-primary-500 rounded-lg font-bold text-lg hover:bg-gray-100 transform hover:scale-105 transition footer-cta">
                 Get Started Today
             </button>
         </div>
@@ -515,10 +561,10 @@
                 testimonial: '"Amazing results in just 3 months! I\'ve lost 20 pounds and gained so much confidence. The personalized workout plan and nutrition guidance were exactly what I needed. I feel stronger, healthier, and more energized than ever before. Best decision I ever made!"',
                 testimonialAr: '"نتائج مذهلة في 3 أشهر فقط! فقدت 9 كجم واكتسبت الكثير من الثقة. خطة التمرين الشخصية والإرشادات الغذائية كانت بالضبط ما احتجته. أشعر بأنني أقوى وأكثر صحة وحيوية من أي وقت مضى. أفضل قرار اتخذته على الإطلاق!"',
                 images: [
-                    { type: 'before', url: 'omar.jpg' },
-                    { type: 'after', url: 'from-orange-400 to-red-600' },
-                    { type: 'progress', url: 'from-orange-300 to-orange-500' },
-                    { type: 'final', url: 'from-red-500 to-red-700' }
+                    { type: 'before', url: 'images/omar.jpg' },
+                    { type: 'after', url: 'images/omar.jpg' },
+                    { type: 'progress', url: 'images/omar.jpg' },
+                    { type: 'final', url: 'images/omar.jpg' }
                 ]
             },
             {
@@ -533,10 +579,10 @@
                 testimonial: '"The personalized approach made all the difference. I finally achieved the body I\'ve always wanted! The strength training program was perfectly tailored to my goals, and the nutrition plan helped me gain lean muscle without excess fat."',
                 testimonialAr: '"النهج الشخصي أحدث كل الفرق. أخيراً حققت الجسم الذي طالما أردته! برنامج تدريب القوة كان مصمماً بشكل مثالي لأهدافي، وخطة التغذية ساعدتني على اكتساب عضلات بدون دهون زائدة."',
                 images: [
-                    { type: 'before', url: 'over.webp' },
-                    { type: 'after', url: 'from-orange-500 to-red-600' },
-                    { type: 'progress', url: 'from-orange-400 to-red-500' },
-                    { type: 'final', url: 'from-red-600 to-red-800' }
+                    { type: 'before', url: 'images/over.webp' },
+                    { type: 'after', url: 'images/over.webp' },
+                    { type: 'progress', url: 'images/over.webp' },
+                    { type: 'final', url: 'images/over.webp' }
                 ]
             },
             {
@@ -551,10 +597,10 @@
                 testimonial: '"Professional, knowledgeable, and motivating. Couldn\'t ask for a better trainer! The combination of cardio and strength training transformed not just my body, but my entire lifestyle. I have so much more energy now!"',
                 testimonialAr: '"محترف، واسع المعرفة، ومحفز. لا يمكن أن أطلب مدرباً أفضل! الجمع بين تمارين الكارديو وتدريب القوة حول ليس فقط جسمي، بل أسلوب حياتي بالكامل. لدي طاقة أكبر بكثير الآن!"',
                 images: [
-                    { type: 'before', url: 'over.webp' },
-                    { type: 'after', url: 'from-orange-400 to-red-500' },
-                    { type: 'progress', url: 'from-orange-300 to-orange-600' },
-                    { type: 'final', url: 'from-red-400 to-red-600' }
+                    { type: 'before', url: 'images/over.webp' },
+                    { type: 'after', url: 'images/over.webp' },
+                    { type: 'progress', url: 'images/over.webp' },
+                    { type: 'final', url: 'images/over.webp' }
                 ]
             },
             {
@@ -569,10 +615,10 @@
                 testimonial: '"Life-changing experience! The training and nutrition plans are exactly what I needed. I went from struggling to climb stairs to running 5K races. My confidence has skyrocketed and I feel like a completely different person!"',
                 testimonialAr: '"تجربة غيرت حياتي! خطط التدريب والتغذية هي بالضبط ما احتجته. انتقلت من صعوبة صعود السلالم إلى الجري في سباقات 5 كم. ثقتي بنفسي ارتفعت بشكل كبير وأشعر وكأنني شخص مختلف تماماً!"',
                 images: [
-                    { type: 'before', url: 'over.webp' },
-                    { type: 'after', url: 'from-orange-500 to-red-700' },
-                    { type: 'progress', url: 'from-orange-400 to-red-500' },
-                    { type: 'final', url: 'from-red-600 to-red-800' }
+                    { type: 'before', url: 'images/over.webp' },
+                    { type: 'after', url: 'images/over.webp' },
+                    { type: 'progress', url: 'images/over.webp' },
+                    { type: 'final', url: 'images/over.webp' }
                 ]
             }
         ];
@@ -627,9 +673,8 @@
             
             // Render thumbnails
             thumbnailContainer.innerHTML = story.images.map((img, index) => `
-                <div onclick="selectImage(${index})" class="w-20 h-20 rounded-lg overflow-hidden cursor-pointer ${index === currentImageIndex ? 'ring-4 ring-orange-500' : 'opacity-60 hover:opacity-100'} transition">
-                    
-                    <img src=${img.url} class="w-full h-full bg-gradient-to-br">
+                <div onclick="selectImage(${index})" class="w-20 h-20 rounded-lg overflow-hidden cursor-pointer ${index === currentImageIndex ? 'ring-4 ring-primary-500' : 'opacity-60 hover:opacity-100'} transition">
+                    <img src="${img.url}" class="w-full h-full object-cover">
                 </div>
             `).join('');
         }
@@ -654,7 +699,6 @@
         // Translations
         const translations = {
             en: {
-                logo: 'FitPro',
                 navHome: 'Home',
                 navAbout: 'About',
                 navServices: 'Services',
@@ -679,7 +723,7 @@
                 service3Desc: 'Flexible online training programs with regular check-ins and progress tracking.',
                 testimonialsTitle: 'Client Success Stories',
                 client1Name: 'Sarah Johnson',
-                client1Text: '"Amazing results in just 3 months! I\'ve lost 20 pounds and gained so much confidence. Best decision I ever made!"',
+                client1Text: '"Amazing results in just 3 months! I\'ve lost 20 pounds and gained so much confidence."',
                 client2Name: 'Mike Chen',
                 client2Text: '"The personalized approach made all the difference. I finally achieved the body I\'ve always wanted!"',
                 client3Name: 'Emma Davis',
@@ -700,7 +744,6 @@
                 footerCta: 'Get Started Today'
             },
             ar: {
-                logo: 'فت برو',
                 navHome: 'الرئيسية',
                 navAbout: 'عني',
                 navServices: 'الخدمات',
@@ -725,7 +768,7 @@
                 service3Desc: 'برامج تدريب مرنة عبر الإنترنت مع متابعة منتظمة وتتبع التقدم.',
                 testimonialsTitle: 'قصص نجاح العملاء',
                 client1Name: 'سارة جونسون',
-                client1Text: '"نتائج مذهلة في 3 أشهر فقط! فقدت 20 رطلاً واكتسبت الكثير من الثقة. أفضل قرار اتخذته على الإطلاق!"',
+                client1Text: '"نتائج مذهلة في 3 أشهر فقط! فقدت 20 رطلاً واكتسبت الكثير من الثقة."',
                 client2Name: 'مايك تشين',
                 client2Text: '"النهج الشخصي أحدث كل الفرق. أخيراً حققت الجسم الذي طالما أردته!"',
                 client3Name: 'إيما ديفيس',
@@ -752,21 +795,22 @@
         // Dark Mode Toggle
         const darkModeToggle = document.getElementById('darkModeToggle');
         const html = document.documentElement;
+        let isDark = localStorage.getItem('theme') === 'dark' ? true : false;
+        html.classList.add(localStorage.getItem('theme'));
 
-        // Initialize dark mode state
-        let isDark = false;
-
-        function applyDarkMode(dark) {
-            isDark = dark;
+        function applyDarkMode(dark) { 
             if (dark) {
                 html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
             } else {
                 html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
             }
+            isDark = !dark;
         }
 
-        darkModeToggle.addEventListener('click', () => {
-            applyDarkMode(!isDark);
+        darkModeToggle.addEventListener('click', () => {          
+            applyDarkMode(isDark);
         });
 
         // Language Toggle
@@ -776,14 +820,9 @@
             currentLang = lang;
             const t = translations[lang];
             
-            // Update direction
             html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
             html.setAttribute('lang', lang);
             
-            // Update all text content
-            document.querySelector('.gradient-text').textContent = t.logo;
-            
-            // Navigation
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks[0].textContent = t.navHome;
             navLinks[1].textContent = t.navAbout;
@@ -791,23 +830,20 @@
             navLinks[3].textContent = t.navTestimonials;
             navLinks[4].textContent = t.navTransform;
             
-            // Mobile menu links
             const mobileNavLinks = document.querySelectorAll('#mobileMenu .nav-link');
             mobileNavLinks[0].textContent = t.navHome;
             mobileNavLinks[1].textContent = t.navAbout;
             mobileNavLinks[2].textContent = t.navServices;
             mobileNavLinks[3].textContent = t.navTestimonials;
-            mobileNavLinks[4].textContent = t.navTransform;
+            // mobileNavLinks[4].textContent = t.navTransform;
             
             langToggle.textContent = t.langBtn;
             
-            // Hero section
             document.querySelector('.hero-title').textContent = t.heroTitle;
             document.querySelector('.hero-subtitle').textContent = t.heroSubtitle;
             document.querySelector('.cta-primary').textContent = t.ctaPrimary;
             document.querySelector('.cta-secondary').textContent = t.ctaSecondary;
             
-            // About section
             document.querySelector('.about-title').textContent = t.aboutTitle;
             document.querySelector('.about-subtitle').textContent = t.aboutSubtitle;
             const aboutTexts = t.aboutText.split('\n\n');
@@ -819,7 +855,6 @@
             certs[0].textContent = t.cert1;
             certs[1].textContent = t.cert2;
             
-            // Services section
             document.querySelector('.services-title').textContent = t.servicesTitle;
             const serviceNames = document.querySelectorAll('.service-name');
             const serviceDescs = document.querySelectorAll('.service-desc');
@@ -830,7 +865,6 @@
             serviceNames[2].textContent = t.service3Name;
             serviceDescs[2].textContent = t.service3Desc;
             
-            // Testimonials section
             document.querySelector('.testimonials-title').textContent = t.testimonialsTitle;
             const clientNames = document.querySelectorAll('.client-name');
             const testimonialTexts = document.querySelectorAll('.testimonial-text');
@@ -843,8 +877,7 @@
             clientNames[3].textContent = t.client4Name;
             testimonialTexts[3].textContent = t.client4Text;
             
-            // Transformations section
-            document.querySelector('.transform-title').textContent = t.transformTitle;
+            // document.querySelector('.transform-title').textContent = t.transformTitle;
             const beforeLabels = document.querySelectorAll('.before-label');
             const afterLabels = document.querySelectorAll('.after-label');
             beforeLabels.forEach(label => label.textContent = t.beforeLabel);
@@ -859,7 +892,6 @@
             transformNames[2].textContent = t.transform3Name;
             transformDescs[2].textContent = t.transform3Desc;
             
-            // Footer section
             document.querySelector('.footer-title').textContent = t.footerTitle;
             document.querySelector('.footer-subtitle').textContent = t.footerSubtitle;
             document.querySelector('.footer-cta').textContent = t.footerCta;
@@ -877,7 +909,6 @@
             mobileMenu.classList.toggle('active');
         });
 
-        // Close mobile menu when clicking a link
         const mobileNavLinks = document.querySelectorAll('#mobileMenu a');
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -898,14 +929,12 @@
             testimonialScroll.scrollBy({ left: 400, behavior: 'smooth' });
         });
 
-        // Close modal with Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeModal();
             }
         });
 
-        // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -918,22 +947,34 @@
 
         // Show/Hide Fixed Social Sidebar on Scroll
         const socialSidebar = document.getElementById('socialSidebar');
-        
-        let lastScrollY = window.scrollY;
+        const navBar = document.getElementById('navBar');
+        const logoImg = document.getElementById('logo');
+        const socialMobile = document.getElementById('socialMobile');
 
         window.addEventListener('scroll', () => {
-            const currentScrollY = window.scrollY;          
+            const currentScrollY = window.scrollY;      
+                       
+            if(currentScrollY >= 10){                
+                if(localStorage.getItem('theme') === 'light') {
+                     logoImg.src = 'images/dark-logo.png';
+                } else {
+                     logoImg.src = 'images/logo-removebg-preview.png';
+                }
+                navBar.classList.add('bg-white/90', 'dark:bg-gray-900/90', 'backdrop-blur-sm', 'shadow-md');
+                navBar.classList.remove('bg-transparent', 'text-white');
+            } 
             
-            
-            // Show sidebar after scrolling down 300px
-            if (currentScrollY > 300) {
+            if (currentScrollY > 400) {
                 socialSidebar.style.opacity = '1';
-            } else {
+                socialMobile.style.opacity = '1';
+            } else if(currentScrollY < 10) {
                 socialSidebar.style.opacity = '0';
+                socialMobile.style.opacity = '0';
+                logoImg.src = 'images/logo-removebg-preview.png';
+                navBar.classList.remove('bg-white/90', 'dark:bg-gray-900/90', 'backdrop-blur-sm', 'shadow-md');
+                navBar.classList.add('bg-transparent' , 'text-white');
             }
-            
-            
-            lastScrollY = currentScrollY;
         });
     </script>
 </body>
+</html>
