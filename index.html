@@ -1,482 +1,896 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FitPro - Personal Training</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#e8f5e9',
-                            100: '#c8e6c9',
-                            200: '#a5d6a7',
-                            300: '#81c784',
-                            400: '#66bb6a',
-                            500: '#21692B',
-                            600: '#1d5e26',
-                            700: '#195221',
-                            800: '#14461c',
-                            900: '#0f3a17',
-                        }
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#e8f5e9",
+                100: "#c8e6c9",
+                200: "#a5d6a7",
+                300: "#81c784",
+                400: "#66bb6a",
+                500: "#21692B",
+                600: "#1d5e26",
+                700: "#195221",
+                800: "#14461c",
+                900: "#0f3a17",
+              },
+            },
+          },
+        },
+      };
     </script>
     <style>
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        
-        * {
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #21692B 0%, #0f3a17 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+      * {
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
 
-        .hero-gradient {
-            background: linear-gradient(135deg, #21692B 0%, #0f3a17 100%);
-        }
+      .gradient-text {
+        background: linear-gradient(135deg, #21692b 0%, #0f3a17 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
 
-        @media (max-width: 768px) {
-            .mobile-menu {
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-            }
-            .mobile-menu.active {
-                max-height: 500px;
-            }
+      .hero-gradient {
+        background: linear-gradient(135deg, #21692b 0%, #0f3a17 100%);
+      }
+
+      @media (max-width: 768px) {
+        .mobile-menu {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
         }
+        .mobile-menu.active {
+          max-height: 500px;
+        }
+      }
     </style>
-</head>
+  </head>
 
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white scroll-smooth">
+  <body
+    class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white scroll-smooth"
+  >
     <!-- Navigation -->
     <nav id="navBar" class="fixed w-full z-50 bg-transparent text-white">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <div class="w-20">
-                    <a href="#home">
-                        <img id="logo" src="images/logo-removebg-preview.png" class="w-full" alt="logo">
-                    </a>
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="#home" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Home</a>
-                    <a href="#about" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">About</a>
-                    <a href="#services" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Services</a>
-                    <a href="#testimonials" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Testimonials</a>
-                    <!-- <a href="#transform" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Transformations</a> -->
-                </div>
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <!-- Logo -->
+          <div class="w-20">
+            <a href="#home">
+              <img
+                id="logo"
+                src="images/logo-removebg-preview.png"
+                class="w-full"
+                alt="logo"
+              />
+            </a>
+          </div>
 
-                <!-- Language & Dark Mode Toggle -->
-                <div class="flex items-center gap-4">
-                    <button id="langToggle" class="px-3 py-1 rounded-lg bg-primary-500 text-white hover:bg-primary-600">
-                        عربي
-                    </button>
-                    <button id="darkModeToggle" class="p-2 rounded-lg dark:bg-gray-700">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                            <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-                        </svg>
-                    </button>
-                    
-                    <!-- Mobile Menu Button -->
-                    <button id="mobileMenuBtn" class="md:hidden p-2">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center gap-8">
+            <a
+              href="#home"
+              class="nav-link hover:text-primary-500 dark:hover:text-primary-400"
+              >Home</a
+            >
+            <a
+              href="#about"
+              class="nav-link hover:text-primary-500 dark:hover:text-primary-400"
+              >About</a
+            >
+            <a
+              href="#services"
+              class="nav-link hover:text-primary-500 dark:hover:text-primary-400"
+              >Services</a
+            >
+            <a
+              href="#testimonials"
+              class="nav-link hover:text-primary-500 dark:hover:text-primary-400"
+              >Testimonials</a
+            >
+            <!-- <a href="#transform" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Transformations</a> -->
+          </div>
 
-            <!-- Mobile Menu -->
-            <div id="mobileMenu" class="mobile-menu md:hidden">
-                <div class="flex flex-col gap-4 pt-4 pb-2">
-                    <a href="#home" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Home</a>
-                    <a href="#about" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">About</a>
-                    <a href="#services" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Services</a>
-                    <a href="#testimonials" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Testimonials</a>
-                    <!-- <a href="#transform" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Transformations</a> -->
-                </div>
-            </div>
+          <!-- Language & Dark Mode Toggle -->
+          <div class="flex items-center gap-4">
+            <button
+              id="langToggle"
+              class="px-3 py-1 rounded-lg bg-primary-500 text-white hover:bg-primary-600"
+            >
+              عربي
+            </button>
+            <button id="darkModeToggle" class="p-2 rounded-lg dark:bg-gray-700">
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  class="dark:hidden"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
+                <path
+                  class="hidden dark:block"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+            </button>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden p-2">
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden">
+          <div class="flex flex-col gap-4 pt-4 pb-2">
+            <a
+              href="#home"
+              class="nav-link hover:text-primary-500 dark:hover:text-primary-400"
+              >Home</a
+            >
+            <a
+              href="#about"
+              class="nav-link hover:text-primary-500 dark:hover:text-primary-400"
+              >About</a
+            >
+            <a
+              href="#services"
+              class="nav-link hover:text-primary-500 dark:hover:text-primary-400"
+              >Services</a
+            >
+            <a
+              href="#testimonials"
+              class="nav-link hover:text-primary-500 dark:hover:text-primary-400"
+              >Testimonials</a
+            >
+            <!-- <a href="#transform" class="nav-link hover:text-primary-500 dark:hover:text-primary-400">Transformations</a> -->
+          </div>
+        </div>
+      </div>
     </nav>
 
     <!-- Fixed Social Sidebar -->
-    <div id="socialSidebar" class=" hidden md:block fixed md:z-50 md:left-auto md:right-6 md:top-1/2 md:-translate-y-1/2 md:-translate-x-0 transition-opacity duration-300 opacity-0">
-        <div class="flex md:flex-col gap-4">
-            <a href="https://wa.me/1234567890" target="_blank" class="w-12 h-12 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                </svg>
-            </a>
-            <a href="https://instagram.com/yourprofile" target="_blank" class="w-12 h-12 bg-pink-500 hover:bg-pink-600 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-            </a>
-            <a href="https://facebook.com/yourprofile" target="_blank" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-            </a>
-        </div>
+    <div
+      id="socialSidebar"
+      class="hidden md:block fixed md:z-50 md:left-auto md:right-6 md:top-1/2 md:-translate-y-1/2 md:-translate-x-0 transition-opacity duration-300 opacity-0"
+    >
+      <div class="flex md:flex-col gap-4">
+        <a
+          href="https://wa.me/01020866054"
+          target="_blank"
+          class="w-12 h-12 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition"
+        >
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+            />
+          </svg>
+        </a>
+        <a
+          href="https://instagram.com/yourprofile"
+          target="_blank"
+          class="w-12 h-12 bg-pink-500 hover:bg-pink-600 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition"
+        >
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+            />
+          </svg>
+        </a>
+        <a
+          href="https://facebook.com/yourprofile"
+          target="_blank"
+          class="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition"
+        >
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+            />
+          </svg>
+        </a>
+      </div>
     </div>
 
     <!-- show only mobile scree -->
-    <div id="socialMobile" class="md:hidden opacity-0 transition delay-150 duration-300 ease-in-out fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-3xl">        
-        <a href="https://wa.me/01022333129" target="_blank" class="flex justify-center items-center m-auto w-full px-8 py-4 bg-primary-500 text-white rounded-lg font-bold text-sm sm:text-lg hover:bg-primary-800 transform hover:scale-105 transition rounded-2xl">
-            <svg class="h-4 sm:h-6 me-[10px]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                </svg>
-            <span class="footer-cta">Start Today</span></a>
+    <div
+      id="socialMobile"
+      class="md:hidden opacity-0 transition delay-150 duration-300 ease-in-out fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-3xl"
+    >
+      <a
+        href="https://wa.me/01020866054"
+        target="_blank"
+        class="flex justify-center items-center m-auto w-full px-8 py-4 bg-primary-500 text-white rounded-lg font-bold text-sm sm:text-lg hover:bg-primary-800 transform hover:scale-105 transition rounded-2xl"
+      >
+        <svg
+          class="h-4 sm:h-6 me-[10px]"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+          />
+        </svg>
+        <span class="footer-cta">Start Today</span></a
+      >
     </div>
 
     <!-- Hero Section -->
-    <section id="home" class="bg-[url(images/test.jpg)] bg-cover bg-center min-h-screen flex items-center">
-        <div class="container mx-auto px-4 py-40">
-            <div class="max-w-4xl mx-auto text-center text-white">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 hero-title">
-                    Transform Your Body, Transform Your Life
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 hero-subtitle">
-                    Achieve your fitness goals with personalized training programs designed just for you
-                </p>
-                <div class="w-[30px] h-[90px] flex justify-center items-end mx-auto rounded-[11px] border border-solid border-white/50 shadow-lg">
-                     <!-- Updated down arrow SVG -->
-                      <a href="#about">                    
-                        <svg class="size-6 h-10 mx-auto animate-bounce text-white drop-shadow-lg" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                      </svg>
-                      </a>
-                   
-                    <!-- commnet fir now -->
-                    <!-- <button class="px-8 py-4 bg-white text-primary-500 rounded-lg font-bold text-lg hover:bg-gray-100 
+    <section
+      id="home"
+      class="bg-[url(images/test.jpg)] bg-cover bg-center min-h-screen flex items-center"
+    >
+      <div class="container mx-auto px-4 py-40">
+        <div class="max-w-4xl mx-auto text-center text-white">
+          <h1 class="text-5xl md:text-7xl font-bold mb-6 hero-title">
+            Transform Your Body, Transform Your Life
+          </h1>
+          <p class="text-xl md:text-2xl mb-8 hero-subtitle">
+            Achieve your fitness goals with personalized training programs
+            designed just for you
+          </p>
+          <div
+            class="w-[30px] h-[90px] flex justify-center items-end mx-auto rounded-[11px] border border-solid border-white/50 shadow-lg"
+          >
+            <!-- Updated down arrow SVG -->
+            <a href="#about">
+              <svg
+                class="size-6 h-10 mx-auto animate-bounce text-white drop-shadow-lg"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </a>
+
+            <!-- commnet fir now -->
+            <!-- <button class="px-8 py-4 bg-white text-primary-500 rounded-lg font-bold text-lg hover:bg-gray-100 
                      hover:scale-105 transition cta-primary">
                         Start Your Journey
                     </button>
                     <button class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-bold text-lg hover:bg-white hover:text-primary-500 transform hover:scale-105 transition cta-secondary">
                         View Programs
                     </button> -->
-                </div>
-                
-                <!-- Social Links in Hero -->
-                <div class="flex gap-6 justify-center items-center my-5">
-                    <a href="https://wa.me/1234567890" target="_blank" class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transform hover:scale-110 transition">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                        </svg>
-                    </a>
-                    <a href="https://instagram.com/yourprofile" target="_blank" class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transform hover:scale-110 transition">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                    <a href="https://facebook.com/yourprofile" target="_blank" class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transform hover:scale-110 transition">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+          </div>
+
+          <!-- Social Links in Hero -->
+          <div class="flex gap-6 justify-center items-center my-5">
+            <a
+              href="https://wa.me/01020866054"
+              target="_blank"
+              class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transform hover:scale-110 transition"
+            >
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://instagram.com/yourprofile"
+              target="_blank"
+              class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transform hover:scale-110 transition"
+            >
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://facebook.com/yourprofile"
+              target="_blank"
+              class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transform hover:scale-110 transition"
+            >
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 about-title">About Me</h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="aspect-[.8/1]">
-                        <img src="images/cover.jfif" alt="about me" class="w-full h-full object-cover rounded-2xl shadow-lg">
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4 about-subtitle">Your Fitness Partner</h3>
-                        <p class="text-lg mb-4 about-text">
-                            With over 10 years of experience in personal training and nutrition, I've helped hundreds of clients achieve their dream bodies and maintain healthy lifestyles.
-                        </p>
-                        <p class="text-lg mb-6 about-text">
-                            My approach combines science-based training methods with personalized nutrition plans to deliver real, sustainable results.
-                        </p>
-                        <div class="flex flex-wrap gap-4">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-6 h-6 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                                </svg>
-                                <span class="cert">Certified Trainer</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-6 h-6 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                                </svg>
-                                <span class="cert">Nutrition Specialist</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-4xl md:text-5xl font-bold text-center mb-12 about-title"
+        >
+          About Me
+        </h2>
+        <div class="max-w-4xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="aspect-[.8/1]">
+              <img
+                src="images/about-me-2.PNG"
+                alt="about me"
+                class="w-full h-full object-cover rounded-2xl shadow-lg"
+              />
             </div>
+            <div>
+              <h3 class="text-2xl font-bold mb-4 about-subtitle">
+                About Me
+              </h3>
+              <p class="text-lg mb-4 about-text">
+                I started my journey in the sports and fitness field in 2016. I
+                am now a Certified Trainer from the international EREPS
+                organization for sports science. 
+              </p>
+              <p class="text-lg mb-6 about-text">
+                I also hold certifications in
+                nutrition and others in correction exercise. I have successfully
+                merged my practical experience with my scientific knowledge,
+                enabling me to help hundreds of people achieve their goals and
+                live a better, healthier life
+              </p>
+              <div class="flex flex-wrap gap-4">
+                <div class="flex items-center gap-2">
+                  <svg
+                    class="w-6 h-6 text-primary-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    />
+                  </svg>
+                  <span class="cert">Certified Trainer</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <svg
+                    class="w-6 h-6 text-primary-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    />
+                  </svg>
+                  <span class="cert">Nutrition Specialist</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="py-20 bg-white dark:bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 services-title">My Services</h2>
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Service 1 -->
-                <div class="p-8 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:shadow-xl transform hover:-translate-y-2 transition">
-                    <div class="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 service-name">Personal Training</h3>
-                    <p class="text-gray-600 dark:text-gray-300 service-desc">
-                        One-on-one customized workout sessions tailored to your specific goals and fitness level.
-                    </p>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="p-8 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:shadow-xl transform hover:-translate-y-2 transition">
-                    <div class="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 service-name">Nutrition Plans</h3>
-                    <p class="text-gray-600 dark:text-gray-300 service-desc">
-                        Custom meal plans designed to complement your training and accelerate your results.
-                    </p>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="p-8 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:shadow-xl transform hover:-translate-y-2 transition">
-                    <div class="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 service-name">Online Coaching</h3>
-                    <p class="text-gray-600 dark:text-gray-300 service-desc">
-                        Flexible online training programs with regular check-ins and progress tracking.
-                    </p>
-                </div>
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-4xl md:text-5xl font-bold text-center mb-12 services-title"
+        >
+          My Services
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div
+            class="p-8 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:shadow-xl transform hover:-translate-y-2 transition"
+          >
+            <div
+              class="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
             </div>
+            <h3 class="text-2xl font-bold mb-4 service-name">
+              Personal Training
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 service-desc">
+              One-on-one customized workout sessions tailored to your specific
+              goals and fitness level.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div
+            class="p-8 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:shadow-xl transform hover:-translate-y-2 transition"
+          >
+            <div
+              class="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 service-name">
+              Nutrition Plans
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 service-desc">
+              Custom meal plans designed to complement your training and
+              accelerate your results.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div
+            class="p-8 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:shadow-xl transform hover:-translate-y-2 transition"
+          >
+            <div
+              class="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 service-name">
+              Online Coaching
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 service-desc">
+              Flexible online training programs with regular check-ins and
+              progress tracking.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Client Success Stories Section -->
     <section id="testimonials" class="py-20 bg-gray-50 dark:bg-gray-800">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 testimonials-title">Client Success Stories</h2>
-            <div class="relative max-w-6xl mx-auto">
-                <div id="testimonialScroll" class="flex gap-6 overflow-x-auto hide-scrollbar scroll-smooth">
-                    <!-- Success Story 1 -->
-                    <div class="min-w-[300px] md:min-w-[400px] p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg cursor-pointer hover:shadow-2xl transition transform hover:-translate-y-2" onclick="openModal(0)">
-                        <div class="relative mb-4 rounded-xl overflow-hidden">
-                            <div class="grid grid-cols-2 gap-2">
-                                <div class="aspect-square bg-gradient-to-br from-gray-300 to-gray-500"></div>
-                                <div class="aspect-square bg-gradient-to-br from-primary-400 to-primary-700"></div>
-                            </div>
-                            <div class="absolute top-2 left-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">Before</div>
-                            <div class="absolute top-2 right-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">After</div>
-                        </div>
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="w-16 h-16 bg-primary-500 rounded-full"></div>
-                            <div>
-                                <h4 class="font-bold text-lg client-name">Sarah Johnson</h4>
-                                <div class="flex text-yellow-400 text-sm">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-300 testimonial-text mb-4">
-                            "Amazing results in just 3 months! I've lost 20 pounds and gained so much confidence."
-                        </p>
-                        <button class="text-primary-500 font-semibold hover:text-primary-600">View Full Story →</button>
-                    </div>
-
-                    <!-- Success Story 2 -->
-                    <div class="min-w-[300px] md:min-w-[400px] p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg cursor-pointer hover:shadow-2xl transition transform hover:-translate-y-2" onclick="openModal(1)">
-                        <div class="relative mb-4 rounded-xl overflow-hidden">
-                            <div class="grid grid-cols-2 gap-2">
-                                <div class="aspect-square bg-gradient-to-br from-gray-400 to-gray-600"></div>
-                                <div class="aspect-square bg-gradient-to-br from-primary-500 to-primary-800"></div>
-                            </div>
-                            <div class="absolute top-2 left-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">Before</div>
-                            <div class="absolute top-2 right-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">After</div>
-                        </div>
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="w-16 h-16 bg-primary-500 rounded-full"></div>
-                            <div>
-                                <h4 class="font-bold text-lg client-name">Mike Chen</h4>
-                                <div class="flex text-yellow-400 text-sm">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-300 testimonial-text mb-4">
-                            "The personalized approach made all the difference. I finally achieved the body I've always wanted!"
-                        </p>
-                        <button class="text-primary-500 font-semibold hover:text-primary-600">View Full Story →</button>
-                    </div>
-
-                    <!-- Success Story 3 -->
-                    <div class="min-w-[300px] md:min-w-[400px] p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg cursor-pointer hover:shadow-2xl transition transform hover:-translate-y-2" onclick="openModal(2)">
-                        <div class="relative mb-4 rounded-xl overflow-hidden">
-                            <div class="grid grid-cols-2 gap-2">
-                                <div class="aspect-square bg-gradient-to-br from-gray-300 to-gray-500"></div>
-                                <div class="aspect-square bg-gradient-to-br from-primary-400 to-primary-600"></div>
-                            </div>
-                            <div class="absolute top-2 left-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">Before</div>
-                            <div class="absolute top-2 right-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">After</div>
-                        </div>
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="w-16 h-16 bg-primary-500 rounded-full"></div>
-                            <div>
-                                <h4 class="font-bold text-lg client-name">Emma Davis</h4>
-                                <div class="flex text-yellow-400 text-sm">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-300 testimonial-text mb-4">
-                            "Professional, knowledgeable, and motivating. Couldn't ask for a better trainer!"
-                        </p>
-                        <button class="text-primary-500 font-semibold hover:text-primary-600">View Full Story →</button>
-                    </div>
-
-                    <!-- Success Story 4 -->
-                    <div class="min-w-[300px] md:min-w-[400px] p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg cursor-pointer hover:shadow-2xl transition transform hover:-translate-y-2" onclick="openModal(3)">
-                        <div class="relative mb-4 rounded-xl overflow-hidden">
-                            <div class="grid grid-cols-2 gap-2">
-                                <div class="aspect-square bg-gradient-to-br from-gray-400 to-gray-600"></div>
-                                <div class="aspect-square bg-gradient-to-br from-primary-500 to-primary-900"></div>
-                            </div>
-                            <div class="absolute top-2 left-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">Before</div>
-                            <div class="absolute top-2 right-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold">After</div>
-                        </div>
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="w-16 h-16 bg-primary-500 rounded-full"></div>
-                            <div>
-                                <h4 class="font-bold text-lg client-name">John Smith</h4>
-                                <div class="flex text-yellow-400 text-sm">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-300 testimonial-text mb-4">
-                            "Life-changing experience! The training and nutrition plans are exactly what I needed."
-                        </p>
-                        <button class="text-primary-500 font-semibold hover:text-primary-600">View Full Story →</button>
-                    </div>
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-4xl md:text-5xl font-bold text-center mb-12 testimonials-title"
+        >
+          Client Success Stories
+        </h2>
+        <div class="relative max-w-6xl mx-auto">
+          <div
+            id="testimonialScroll"
+            class="flex gap-6 overflow-x-auto hide-scrollbar scroll-smooth"
+          >
+            <!-- Success Story 1 -->
+            <div
+              class="min-w-[300px] md:min-w-[400px] p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg cursor-pointer hover:shadow-2xl transition transform hover:-translate-y-2"
+              onclick="openModal(0)"
+            >
+              <div class="relative mb-4 rounded-xl overflow-hidden">
+                <div class="grid grid-cols-2 gap-2">
+                  <div
+                    class="aspect-square bg-gradient-to-br from-gray-300 to-gray-500"
+                  ></div>
+                  <div
+                    class="aspect-square bg-gradient-to-br from-primary-400 to-primary-700"
+                  ></div>
                 </div>
-
-                <!-- Navigation Arrows -->
-                <button id="scrollLeft" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white dark:bg-gray-700 p-3 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                    </svg>
-                </button>
-                <button id="scrollRight" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white dark:bg-gray-700 p-3 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </button>
+                <div
+                  class="absolute top-2 left-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold"
+                >
+                  Before
+                </div>
+                <div
+                  class="absolute top-2 right-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold"
+                >
+                  After
+                </div>
+              </div>
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-16 h-16 bg-primary-500 rounded-full"></div>
+                <div>
+                  <h4 class="font-bold text-lg client-name">Sarah Johnson</h4>
+                  <div class="flex text-yellow-400 text-sm">★★★★★</div>
+                </div>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 testimonial-text mb-4">
+                "Amazing results in just 3 months! I've lost 20 pounds and
+                gained so much confidence."
+              </p>
+              <button
+                class="text-primary-500 font-semibold hover:text-primary-600"
+              >
+                View Full Story →
+              </button>
             </div>
+
+            <!-- Success Story 2 -->
+            <div
+              class="min-w-[300px] md:min-w-[400px] p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg cursor-pointer hover:shadow-2xl transition transform hover:-translate-y-2"
+              onclick="openModal(1)"
+            >
+              <div class="relative mb-4 rounded-xl overflow-hidden">
+                <div class="grid grid-cols-2 gap-2">
+                  <div
+                    class="aspect-square bg-gradient-to-br from-gray-400 to-gray-600"
+                  ></div>
+                  <div
+                    class="aspect-square bg-gradient-to-br from-primary-500 to-primary-800"
+                  ></div>
+                </div>
+                <div
+                  class="absolute top-2 left-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold"
+                >
+                  Before
+                </div>
+                <div
+                  class="absolute top-2 right-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold"
+                >
+                  After
+                </div>
+              </div>
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-16 h-16 bg-primary-500 rounded-full"></div>
+                <div>
+                  <h4 class="font-bold text-lg client-name">Mike Chen</h4>
+                  <div class="flex text-yellow-400 text-sm">★★★★★</div>
+                </div>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 testimonial-text mb-4">
+                "The personalized approach made all the difference. I finally
+                achieved the body I've always wanted!"
+              </p>
+              <button
+                class="text-primary-500 font-semibold hover:text-primary-600"
+              >
+                View Full Story →
+              </button>
+            </div>
+
+            <!-- Success Story 3 -->
+            <div
+              class="min-w-[300px] md:min-w-[400px] p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg cursor-pointer hover:shadow-2xl transition transform hover:-translate-y-2"
+              onclick="openModal(2)"
+            >
+              <div class="relative mb-4 rounded-xl overflow-hidden">
+                <div class="grid grid-cols-2 gap-2">
+                  <div
+                    class="aspect-square bg-gradient-to-br from-gray-300 to-gray-500"
+                  ></div>
+                  <div
+                    class="aspect-square bg-gradient-to-br from-primary-400 to-primary-600"
+                  ></div>
+                </div>
+                <div
+                  class="absolute top-2 left-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold"
+                >
+                  Before
+                </div>
+                <div
+                  class="absolute top-2 right-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold"
+                >
+                  After
+                </div>
+              </div>
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-16 h-16 bg-primary-500 rounded-full"></div>
+                <div>
+                  <h4 class="font-bold text-lg client-name">Emma Davis</h4>
+                  <div class="flex text-yellow-400 text-sm">★★★★★</div>
+                </div>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 testimonial-text mb-4">
+                "Professional, knowledgeable, and motivating. Couldn't ask for a
+                better trainer!"
+              </p>
+              <button
+                class="text-primary-500 font-semibold hover:text-primary-600"
+              >
+                View Full Story →
+              </button>
+            </div>
+
+            <!-- Success Story 4 -->
+            <div
+              class="min-w-[300px] md:min-w-[400px] p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg cursor-pointer hover:shadow-2xl transition transform hover:-translate-y-2"
+              onclick="openModal(3)"
+            >
+              <div class="relative mb-4 rounded-xl overflow-hidden">
+                <div class="grid grid-cols-2 gap-2">
+                  <div
+                    class="aspect-square bg-gradient-to-br from-gray-400 to-gray-600"
+                  ></div>
+                  <div
+                    class="aspect-square bg-gradient-to-br from-primary-500 to-primary-900"
+                  ></div>
+                </div>
+                <div
+                  class="absolute top-2 left-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold"
+                >
+                  Before
+                </div>
+                <div
+                  class="absolute top-2 right-2 bg-white dark:bg-gray-800 px-2 py-1 rounded-full text-xs font-bold"
+                >
+                  After
+                </div>
+              </div>
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-16 h-16 bg-primary-500 rounded-full"></div>
+                <div>
+                  <h4 class="font-bold text-lg client-name">John Smith</h4>
+                  <div class="flex text-yellow-400 text-sm">★★★★★</div>
+                </div>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 testimonial-text mb-4">
+                "Life-changing experience! The training and nutrition plans are
+                exactly what I needed."
+              </p>
+              <button
+                class="text-primary-500 font-semibold hover:text-primary-600"
+              >
+                View Full Story →
+              </button>
+            </div>
+          </div>
+
+          <!-- Navigation Arrows -->
+          <button
+            id="scrollLeft"
+            class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white dark:bg-gray-700 p-3 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button
+            id="scrollRight"
+            class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white dark:bg-gray-700 p-3 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
         </div>
+      </div>
     </section>
 
     <!-- Success Story Modal -->
-    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden items-center justify-center p-4" onclick="closeModalOnOutside(event)">
-        <div class="bg-white dark:bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative" onclick="event.stopPropagation()">
-            <!-- Close Button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    <div
+      id="successModal"
+      class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden items-center justify-center p-4"
+      onclick="closeModalOnOutside(event)"
+    >
+      <div
+        class="bg-white dark:bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
+        onclick="event.stopPropagation()"
+      >
+        <!-- Close Button -->
+        <button
+          onclick="closeModal()"
+          class="absolute top-4 right-4 z-10 w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+
+        <div class="p-8">
+          <!-- Image Gallery -->
+          <div class="relative mb-8">
+            <div
+              class="relative aspect-video bg-gray-200 dark:bg-gray-700 rounded-xl overflow-hidden"
+            >
+              <div id="modalImageContainer" class="w-full h-full"></div>
+
+              <!-- Image Navigation Arrows -->
+              <button
+                onclick="previousImage()"
+                class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 dark:bg-gray-800/90 rounded-full flex items-center justify-center hover:bg-white dark:hover:bg-gray-700 transition"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
                 </svg>
-            </button>
+              </button>
+              <button
+                onclick="nextImage()"
+                class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 dark:bg-gray-800/90 rounded-full flex items-center justify-center hover:bg-white dark:hover:bg-gray-700 transition"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
 
-            <div class="p-8">
-                <!-- Image Gallery -->
-                <div class="relative mb-8">
-                    <div class="relative aspect-video bg-gray-200 dark:bg-gray-700 rounded-xl overflow-hidden">
-                        <div id="modalImageContainer" class="w-full h-full"></div>
-                        
-                        <!-- Image Navigation Arrows -->
-                        <button onclick="previousImage()" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 dark:bg-gray-800/90 rounded-full flex items-center justify-center hover:bg-white dark:hover:bg-gray-700 transition">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                            </svg>
-                        </button>
-                        <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 dark:bg-gray-800/90 rounded-full flex items-center justify-center hover:bg-white dark:hover:bg-gray-700 transition">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                            </svg>
-                        </button>
-
-                        <!-- Image Counter -->
-                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm">
-                            <span id="imageCounter">1 / 4</span>
-                        </div>
-                    </div>
-
-                    <!-- Thumbnail Navigation -->
-                    <div class="flex gap-2 mt-4 overflow-x-auto hide-scrollbar">
-                        <div id="thumbnailContainer" class="flex gap-2"></div>
-                    </div>
-                </div>
-
-                <!-- Client Info -->
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-20 h-20 bg-primary-500 rounded-full"></div>
-                    <div>
-                        <h3 id="modalClientName" class="text-2xl font-bold mb-1">Sarah Johnson</h3>
-                        <div class="flex text-yellow-400">★★★★★</div>
-                    </div>
-                </div>
-
-                <!-- Success Details -->
-                <div class="grid md:grid-cols-3 gap-4 mb-6">
-                    <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl text-center">
-                        <div class="text-3xl font-bold text-primary-500" id="modalWeight">-20 lbs</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">Weight Lost</div>
-                    </div>
-                    <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl text-center">
-                        <div class="text-3xl font-bold text-primary-500" id="modalDuration">3 months</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">Duration</div>
-                    </div>
-                    <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl text-center">
-                        <div class="text-3xl font-bold text-primary-500" id="modalProgram">Full Body</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">Program</div>
-                    </div>
-                </div>
-
-                <!-- Testimonial -->
-                <div class="mb-6">
-                    <h4 class="text-xl font-bold mb-3">Their Story</h4>
-                    <p id="modalTestimonial" class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                        "Amazing results in just 3 months! I've lost 20 pounds and gained so much confidence. The personalized workout plan and nutrition guidance were exactly what I needed. I feel stronger, healthier, and more energized than ever before. Best decision I ever made!"
-                    </p>
-                </div>
-
-                <!-- CTA -->
-                <button class="w-full py-4 bg-gradient-to-r from-primary-500 to-primary-800 text-white rounded-xl font-bold text-lg hover:from-primary-600 hover:to-primary-900 transition">
-                    Start Your Transformation
-                </button>
+              <!-- Image Counter -->
+              <div
+                class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm"
+              >
+                <span id="imageCounter">1 / 4</span>
+              </div>
             </div>
+
+            <!-- Thumbnail Navigation -->
+            <div class="flex gap-2 mt-4 overflow-x-auto hide-scrollbar">
+              <div id="thumbnailContainer" class="flex gap-2"></div>
+            </div>
+          </div>
+
+          <!-- Client Info -->
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-20 h-20 bg-primary-500 rounded-full"></div>
+            <div>
+              <h3 id="modalClientName" class="text-2xl font-bold mb-1">
+                Sarah Johnson
+              </h3>
+              <div class="flex text-yellow-400">★★★★★</div>
+            </div>
+          </div>
+
+          <!-- Success Details -->
+          <div class="grid md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl text-center">
+              <div class="text-3xl font-bold text-primary-500" id="modalWeight">
+                -20 lbs
+              </div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">
+                Weight Lost
+              </div>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl text-center">
+              <div
+                class="text-3xl font-bold text-primary-500"
+                id="modalDuration"
+              >
+                3 months
+              </div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">
+                Duration
+              </div>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl text-center">
+              <div
+                class="text-3xl font-bold text-primary-500"
+                id="modalProgram"
+              >
+                Full Body
+              </div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">
+                Program
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial -->
+          <div class="mb-6">
+            <h4 class="text-xl font-bold mb-3">Their Story</h4>
+            <p
+              id="modalTestimonial"
+              class="text-gray-600 dark:text-gray-300 leading-relaxed"
+            >
+              "Amazing results in just 3 months! I've lost 20 pounds and gained
+              so much confidence. The personalized workout plan and nutrition
+              guidance were exactly what I needed. I feel stronger, healthier,
+              and more energized than ever before. Best decision I ever made!"
+            </p>
+          </div>
+
+          <!-- CTA -->
+          <button
+            class="w-full py-4 bg-gradient-to-r from-primary-500 to-primary-800 text-white rounded-xl font-bold text-lg hover:from-primary-600 hover:to-primary-900 transition"
+          >
+            Start Your Transformation
+          </button>
         </div>
+      </div>
     </div>
 
     <!-- Transformations Section -->
@@ -537,444 +951,518 @@
 
     <!-- Footer CTA -->
     <section class="py-20 hero-gradient">
-        <div class="container mx-auto px-4 text-center text-white">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6 footer-title">Ready to Start Your Transformation?</h2>
-            <p class="text-xl mb-8 footer-subtitle">Join hundreds of satisfied clients who achieved their dream bodies</p>
-            <button class="px-8 py-4 bg-white text-primary-500 rounded-lg font-bold text-lg hover:bg-gray-100 transform hover:scale-105 transition footer-cta">
-                Get Started Today
-            </button>
-        </div>
+      <div class="container mx-auto px-4 text-center text-white">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 footer-title">
+          Ready to Start Your Transformation?
+        </h2>
+        <p class="text-xl mb-8 footer-subtitle">
+          Join hundreds of satisfied clients who achieved their dream bodies
+        </p>
+        <button
+          class="px-8 py-4 bg-white text-primary-500 rounded-lg font-bold text-lg hover:bg-gray-100 transform hover:scale-105 transition footer-cta"
+        >
+          Get Started Today
+        </button>
+      </div>
     </section>
 
     <script>
-        // Success Stories Data
-        const successStories = [
-            {
-                name: 'Sarah Johnson',
-                nameAr: 'سارة جونسون',
-                weight: '-20 lbs',
-                weightAr: '-9 كجم',
-                duration: '3 months',
-                durationAr: '3 أشهر',
-                program: 'Full Body',
-                programAr: 'الجسم الكامل',
-                testimonial: '"Amazing results in just 3 months! I\'ve lost 20 pounds and gained so much confidence. The personalized workout plan and nutrition guidance were exactly what I needed. I feel stronger, healthier, and more energized than ever before. Best decision I ever made!"',
-                testimonialAr: '"نتائج مذهلة في 3 أشهر فقط! فقدت 9 كجم واكتسبت الكثير من الثقة. خطة التمرين الشخصية والإرشادات الغذائية كانت بالضبط ما احتجته. أشعر بأنني أقوى وأكثر صحة وحيوية من أي وقت مضى. أفضل قرار اتخذته على الإطلاق!"',
-                images: [
-                    { type: 'before', url: 'images/omar.jpg' },
-                    { type: 'after', url: 'images/omar.jpg' },
-                    { type: 'progress', url: 'images/omar.jpg' },
-                    { type: 'final', url: 'images/omar.jpg' }
-                ]
-            },
-            {
-                name: 'Mike Chen',
-                nameAr: 'مايك تشين',
-                weight: '+15 lbs',
-                weightAr: '+7 كجم عضلات',
-                duration: '4 months',
-                durationAr: '4 أشهر',
-                program: 'Muscle Gain',
-                programAr: 'بناء العضلات',
-                testimonial: '"The personalized approach made all the difference. I finally achieved the body I\'ve always wanted! The strength training program was perfectly tailored to my goals, and the nutrition plan helped me gain lean muscle without excess fat."',
-                testimonialAr: '"النهج الشخصي أحدث كل الفرق. أخيراً حققت الجسم الذي طالما أردته! برنامج تدريب القوة كان مصمماً بشكل مثالي لأهدافي، وخطة التغذية ساعدتني على اكتساب عضلات بدون دهون زائدة."',
-                images: [
-                    { type: 'before', url: 'images/over.webp' },
-                    { type: 'after', url: 'images/over.webp' },
-                    { type: 'progress', url: 'images/over.webp' },
-                    { type: 'final', url: 'images/over.webp' }
-                ]
-            },
-            {
-                name: 'Emma Davis',
-                nameAr: 'إيما ديفيس',
-                weight: '-25 lbs',
-                weightAr: '-11 كجم',
-                duration: '5 months',
-                durationAr: '5 أشهر',
-                program: 'Weight Loss',
-                programAr: 'فقدان الوزن',
-                testimonial: '"Professional, knowledgeable, and motivating. Couldn\'t ask for a better trainer! The combination of cardio and strength training transformed not just my body, but my entire lifestyle. I have so much more energy now!"',
-                testimonialAr: '"محترف، واسع المعرفة، ومحفز. لا يمكن أن أطلب مدرباً أفضل! الجمع بين تمارين الكارديو وتدريب القوة حول ليس فقط جسمي، بل أسلوب حياتي بالكامل. لدي طاقة أكبر بكثير الآن!"',
-                images: [
-                    { type: 'before', url: 'images/over.webp' },
-                    { type: 'after', url: 'images/over.webp' },
-                    { type: 'progress', url: 'images/over.webp' },
-                    { type: 'final', url: 'images/over.webp' }
-                ]
-            },
-            {
-                name: 'John Smith',
-                nameAr: 'جون سميث',
-                weight: '-30 lbs',
-                weightAr: '-14 كجم',
-                duration: '6 months',
-                durationAr: '6 أشهر',
-                program: 'Transformation',
-                programAr: 'التحول الكامل',
-                testimonial: '"Life-changing experience! The training and nutrition plans are exactly what I needed. I went from struggling to climb stairs to running 5K races. My confidence has skyrocketed and I feel like a completely different person!"',
-                testimonialAr: '"تجربة غيرت حياتي! خطط التدريب والتغذية هي بالضبط ما احتجته. انتقلت من صعوبة صعود السلالم إلى الجري في سباقات 5 كم. ثقتي بنفسي ارتفعت بشكل كبير وأشعر وكأنني شخص مختلف تماماً!"',
-                images: [
-                    { type: 'before', url: 'images/over.webp' },
-                    { type: 'after', url: 'images/over.webp' },
-                    { type: 'progress', url: 'images/over.webp' },
-                    { type: 'final', url: 'images/over.webp' }
-                ]
-            }
-        ];
+      // Success Stories Data
+      const successStories = [
+        {
+          name: "Sarah Johnson",
+          nameAr: "سارة جونسون",
+          weight: "-20 lbs",
+          weightAr: "-9 كجم",
+          duration: "3 months",
+          durationAr: "3 أشهر",
+          program: "Full Body",
+          programAr: "الجسم الكامل",
+          testimonial:
+            '"Amazing results in just 3 months! I\'ve lost 20 pounds and gained so much confidence. The personalized workout plan and nutrition guidance were exactly what I needed. I feel stronger, healthier, and more energized than ever before. Best decision I ever made!"',
+          testimonialAr:
+            '"نتائج مذهلة في 3 أشهر فقط! فقدت 9 كجم واكتسبت الكثير من الثقة. خطة التمرين الشخصية والإرشادات الغذائية كانت بالضبط ما احتجته. أشعر بأنني أقوى وأكثر صحة وحيوية من أي وقت مضى. أفضل قرار اتخذته على الإطلاق!"',
+          images: [
+            { type: "before", url: "images/omar.jpg" },
+            { type: "after", url: "images/omar.jpg" },
+            { type: "progress", url: "images/omar.jpg" },
+            { type: "final", url: "images/omar.jpg" },
+          ],
+        },
+        {
+          name: "Mike Chen",
+          nameAr: "مايك تشين",
+          weight: "+15 lbs",
+          weightAr: "+7 كجم عضلات",
+          duration: "4 months",
+          durationAr: "4 أشهر",
+          program: "Muscle Gain",
+          programAr: "بناء العضلات",
+          testimonial:
+            '"The personalized approach made all the difference. I finally achieved the body I\'ve always wanted! The strength training program was perfectly tailored to my goals, and the nutrition plan helped me gain lean muscle without excess fat."',
+          testimonialAr:
+            '"النهج الشخصي أحدث كل الفرق. أخيراً حققت الجسم الذي طالما أردته! برنامج تدريب القوة كان مصمماً بشكل مثالي لأهدافي، وخطة التغذية ساعدتني على اكتساب عضلات بدون دهون زائدة."',
+          images: [
+            { type: "before", url: "images/over.webp" },
+            { type: "after", url: "images/over.webp" },
+            { type: "progress", url: "images/over.webp" },
+            { type: "final", url: "images/over.webp" },
+          ],
+        },
+        {
+          name: "Emma Davis",
+          nameAr: "إيما ديفيس",
+          weight: "-25 lbs",
+          weightAr: "-11 كجم",
+          duration: "5 months",
+          durationAr: "5 أشهر",
+          program: "Weight Loss",
+          programAr: "فقدان الوزن",
+          testimonial:
+            '"Professional, knowledgeable, and motivating. Couldn\'t ask for a better trainer! The combination of cardio and strength training transformed not just my body, but my entire lifestyle. I have so much more energy now!"',
+          testimonialAr:
+            '"محترف، واسع المعرفة، ومحفز. لا يمكن أن أطلب مدرباً أفضل! الجمع بين تمارين الكارديو وتدريب القوة حول ليس فقط جسمي، بل أسلوب حياتي بالكامل. لدي طاقة أكبر بكثير الآن!"',
+          images: [
+            { type: "before", url: "images/over.webp" },
+            { type: "after", url: "images/over.webp" },
+            { type: "progress", url: "images/over.webp" },
+            { type: "final", url: "images/over.webp" },
+          ],
+        },
+        {
+          name: "John Smith",
+          nameAr: "جون سميث",
+          weight: "-30 lbs",
+          weightAr: "-14 كجم",
+          duration: "6 months",
+          durationAr: "6 أشهر",
+          program: "Transformation",
+          programAr: "التحول الكامل",
+          testimonial:
+            '"Life-changing experience! The training and nutrition plans are exactly what I needed. I went from struggling to climb stairs to running 5K races. My confidence has skyrocketed and I feel like a completely different person!"',
+          testimonialAr:
+            '"تجربة غيرت حياتي! خطط التدريب والتغذية هي بالضبط ما احتجته. انتقلت من صعوبة صعود السلالم إلى الجري في سباقات 5 كم. ثقتي بنفسي ارتفعت بشكل كبير وأشعر وكأنني شخص مختلف تماماً!"',
+          images: [
+            { type: "before", url: "images/over.webp" },
+            { type: "after", url: "images/over.webp" },
+            { type: "progress", url: "images/over.webp" },
+            { type: "final", url: "images/over.webp" },
+          ],
+        },
+      ];
 
-        let currentStoryIndex = 0;
-        let currentImageIndex = 0;
+      let currentStoryIndex = 0;
+      let currentImageIndex = 0;
 
-        function openModal(storyIndex) {
-            currentStoryIndex = storyIndex;
-            currentImageIndex = 0;
-            const story = successStories[storyIndex];
-            const isArabic = currentLang === 'ar';
-            
-            document.getElementById('modalClientName').textContent = isArabic ? story.nameAr : story.name;
-            document.getElementById('modalWeight').textContent = isArabic ? story.weightAr : story.weight;
-            document.getElementById('modalDuration').textContent = isArabic ? story.durationAr : story.duration;
-            document.getElementById('modalProgram').textContent = isArabic ? story.programAr : story.program;
-            document.getElementById('modalTestimonial').textContent = isArabic ? story.testimonialAr : story.testimonial;
-            
-            renderGallery();
-            document.getElementById('successModal').classList.remove('hidden');
-            document.getElementById('successModal').classList.add('flex');
-            document.body.style.overflow = 'hidden';
+      function openModal(storyIndex) {
+        currentStoryIndex = storyIndex;
+        currentImageIndex = 0;
+        const story = successStories[storyIndex];
+        const isArabic = currentLang === "ar";
+
+        document.getElementById("modalClientName").textContent = isArabic
+          ? story.nameAr
+          : story.name;
+        document.getElementById("modalWeight").textContent = isArabic
+          ? story.weightAr
+          : story.weight;
+        document.getElementById("modalDuration").textContent = isArabic
+          ? story.durationAr
+          : story.duration;
+        document.getElementById("modalProgram").textContent = isArabic
+          ? story.programAr
+          : story.program;
+        document.getElementById("modalTestimonial").textContent = isArabic
+          ? story.testimonialAr
+          : story.testimonial;
+
+        renderGallery();
+        document.getElementById("successModal").classList.remove("hidden");
+        document.getElementById("successModal").classList.add("flex");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        document.getElementById("successModal").classList.add("hidden");
+        document.getElementById("successModal").classList.remove("flex");
+        document.body.style.overflow = "auto";
+      }
+
+      function closeModalOnOutside(event) {
+        if (event.target.id === "successModal") {
+          closeModal();
         }
+      }
 
-        function closeModal() {
-            document.getElementById('successModal').classList.add('hidden');
-            document.getElementById('successModal').classList.remove('flex');
-            document.body.style.overflow = 'auto';
-        }
+      function renderGallery() {
+        const story = successStories[currentStoryIndex];
+        const imageContainer = document.getElementById("modalImageContainer");
+        const thumbnailContainer =
+          document.getElementById("thumbnailContainer");
+        const currentImage = story.images[currentImageIndex];
 
-        function closeModalOnOutside(event) {
-            if (event.target.id === 'successModal') {
-                closeModal();
-            }
-        }
-
-        function renderGallery() {
-            const story = successStories[currentStoryIndex];
-            const imageContainer = document.getElementById('modalImageContainer');
-            const thumbnailContainer = document.getElementById('thumbnailContainer');
-            const currentImage = story.images[currentImageIndex];
-            
-            // Render main image
-            imageContainer.innerHTML = `                
-                <img src="${currentImage.url}" alt="${currentImage.type}" class="w-full h-full object-contain relative">
-                <div class="absolute bottom-4 left-4 bg-white dark:bg-gray-800 px-3 py-1 rounded-full text-sm font-bold">${currentImage.type.charAt(0).toUpperCase() + currentImage.type.slice(1)}</div>
+        // Render main image
+        imageContainer.innerHTML = `                
+                <img src="${currentImage.url}" alt="${
+          currentImage.type
+        }" class="w-full h-full object-contain relative">
+                <div class="absolute bottom-4 left-4 bg-white dark:bg-gray-800 px-3 py-1 rounded-full text-sm font-bold">${
+                  currentImage.type.charAt(0).toUpperCase() +
+                  currentImage.type.slice(1)
+                }</div>
             `;
-            
-            // Update counter
-            document.getElementById('imageCounter').textContent = `${currentImageIndex + 1} / ${story.images.length}`;
-            
-            // Render thumbnails
-            thumbnailContainer.innerHTML = story.images.map((img, index) => `
-                <div onclick="selectImage(${index})" class="w-20 h-20 rounded-lg overflow-hidden cursor-pointer ${index === currentImageIndex ? 'ring-4 ring-primary-500' : 'opacity-60 hover:opacity-100'} transition">
+
+        // Update counter
+        document.getElementById("imageCounter").textContent = `${
+          currentImageIndex + 1
+        } / ${story.images.length}`;
+
+        // Render thumbnails
+        thumbnailContainer.innerHTML = story.images
+          .map(
+            (img, index) => `
+                <div onclick="selectImage(${index})" class="w-20 h-20 rounded-lg overflow-hidden cursor-pointer ${
+              index === currentImageIndex
+                ? "ring-4 ring-primary-500"
+                : "opacity-60 hover:opacity-100"
+            } transition">
                     <img src="${img.url}" class="w-full h-full object-cover">
                 </div>
-            `).join('');
+            `
+          )
+          .join("");
+      }
+
+      function selectImage(index) {
+        currentImageIndex = index;
+        renderGallery();
+      }
+
+      function previousImage() {
+        const story = successStories[currentStoryIndex];
+        currentImageIndex =
+          (currentImageIndex - 1 + story.images.length) % story.images.length;
+        renderGallery();
+      }
+
+      function nextImage() {
+        const story = successStories[currentStoryIndex];
+        currentImageIndex = (currentImageIndex + 1) % story.images.length;
+        renderGallery();
+      }
+
+      // Translations
+      const translations = {
+        en: {
+          navHome: "Home",
+          navAbout: "About",
+          navServices: "Services",
+          navTestimonials: "Testimonials",
+          navTransform: "Transformations",
+          langBtn: "عربي",
+          heroTitle: "Transform Your Body, Transform Your Life",
+          heroSubtitle:
+            "Achieve your fitness goals with personalized training programs designed just for you",
+          ctaPrimary: "Start Your Journey",
+          ctaSecondary: "View Programs",
+          aboutTitle: "About Me",
+          aboutSubtitle: "About Me",
+          aboutText:
+            "I started my journey in the sports and fitness field in 2016. I am now a Certified Trainer from the international EREPS organization for sports science.\n\nI also hold certifications in nutrition and others in correction exercise. I have successfully merged my practical experience with my scientific knowledge, enabling me to help hundreds of people achieve their goals and live a better, healthier life",
+          cert1: "Certified Trainer",
+          cert2: "Nutrition Specialist",
+          servicesTitle: "My Services",
+          service1Name: "Follow Up",
+          service1Desc: `Follow-up is the foundation of everything, That's why you'll never find a plan from me without proper check-ins, I actually love knowing the smallest details about you , how you're feeling — and I'II always be right there for you whenever you message or need me.`,
+          service2Name: "Nutrition Plan",
+          service2Desc:
+            "A nutrition plan with accurately calculated calories, macros, and micros — but most importantly, it's realistic and tailored to your food preferences and budget. It's also super flexible, so you don't have to eat the same meals every day.",
+          service3Name: "Training Program",
+          service3Desc:
+            "A training program designed specifically for you — based on your body, training experience, and the equipment you have at the gym or at home. And the best part? Every exercise is explained in professional video tutorials, just like I’m right there beside you.",
+          testimonialsTitle: "Client Success Stories",
+          client1Name: "Sarah Johnson",
+          client1Text:
+            '"Amazing results in just 3 months! I\'ve lost 20 pounds and gained so much confidence."',
+          client2Name: "Mike Chen",
+          client2Text:
+            '"The personalized approach made all the difference. I finally achieved the body I\'ve always wanted!"',
+          client3Name: "Emma Davis",
+          client3Text:
+            '"Professional, knowledgeable, and motivating. Couldn\'t ask for a better trainer!"',
+          client4Name: "John Smith",
+          client4Text:
+            '"Life-changing experience! The training and nutrition plans are exactly what I needed."',
+          transformTitle: "Incredible Transformations",
+          beforeLabel: "Before",
+          afterLabel: "After",
+          transform1Name: "Alex Rodriguez",
+          transform1Desc: "Lost 30 lbs in 4 months",
+          transform2Name: "Lisa Anderson",
+          transform2Desc: "Gained 15 lbs muscle in 5 months",
+          transform3Name: "David Kim",
+          transform3Desc: "Complete body recomp in 6 months",
+          footerTitle: "Ready to Start Your Transformation?",
+          footerSubtitle:
+            "Join hundreds of satisfied clients who achieved their dream bodies",
+          footerCta: "Get Started Today",
+        },
+        ar: {
+          navHome: "الرئيسية",
+          navAbout: "عني",
+          navServices: "الخدمات",
+          navTestimonials: "آراء العملاء",
+          navTransform: "التحولات",
+          langBtn: "English",
+          heroTitle: "حول جسمك، حول حياتك",
+          heroSubtitle:
+            "حقق أهدافك في اللياقة البدنية مع برامج تدريب مخصصة صممت خصيصاً لك",
+          ctaPrimary: "ابدأ رحلتك",
+          ctaSecondary: "عرض البرامج",
+          aboutTitle: "عني",
+          aboutSubtitle: "عني",
+          aboutText:`بدأت  رحلتي في مجال الرياضة من سنة 2016، والحمد لله بقيت مدرب معتمد من منظمة EREPS العالمية لعلوم الرياضة.
+كمان أخدت شهادات في التغذية، وشهادات تانية في تصحيح التمارين عشان اضمن إن تمرينك صح ومناسب ليك. قدرت أوفق بين خبرتي العملية و العلم اللي درسته، وبفضل ده، ساعدت مئات الأشخاص إنهم يوصلوا لأهدافهم ويعيشوا حياة صحية أحسن `,
+          cert1: "مدرب معتمد",
+          cert2: "أخصائي تغذية",
+          servicesTitle: "خدماتي",
+          service1Name: "نظام المتابعه",
+          service1Desc:
+            " المتابعة هي الأساس في كل حاجة عشان كده عمرك ما هتلاقي عندي باقة تدريب من غير متابعة، بالعكس أنا بحب أعرف عنك كل حاجة حتى أبسط التفاصيل وهتلاقيني جنبك أول ما تبعتلي أو تحتاجني في أي وقت.",
+          service2Name: "خطط التغذية",
+          service2Desc: `خطه غذائيه محسوبة السعرات والماكروز والميكروز، والأهم إنها واقعيه
+ومناسب ليك سواء في اختيارات الأكل أو في ميزانيتك، وكمان مرنه جدًا لدرجة إنك مش مضطر تاكل نفس الأكل كل يوم.`,
+          service3Name: "نظام التمرين",
+          service3Desc: `البرنامج التدريبي معمول مخصوص ليك، على حسب جسمك وخبرتك وعُمرك التدريبي، وكمان حسب الأجهزة اللي موجودة عندك في الجيم أو الأدوات اللي عندك في البيت. والأحلى إن كل تمرين متشرح بالفيديو بشكل احترافي كأني واقف جنبك وبدرّبك بنفسي.
+`,
+          testimonialsTitle: "قصص نجاح العملاء",
+          client1Name: "سارة جونسون",
+          client1Text:
+            '"نتائج مذهلة في 3 أشهر فقط! فقدت 20 رطلاً واكتسبت الكثير من الثقة."',
+          client2Name: "مايك تشين",
+          client2Text:
+            '"النهج الشخصي أحدث كل الفرق. أخيراً حققت الجسم الذي طالما أردته!"',
+          client3Name: "إيما ديفيس",
+          client3Text:
+            '"محترف، واسع المعرفة، ومحفز. لا يمكن أن أطلب مدرباً أفضل!"',
+          client4Name: "جون سميث",
+          client4Text:
+            '"تجربة غيرت حياتي! خطط التدريب والتغذية هي بالضبط ما احتجته."',
+          transformTitle: "تحولات مذهلة",
+          beforeLabel: "قبل",
+          afterLabel: "بعد",
+          transform1Name: "أليكس رودريجيز",
+          transform1Desc: "فقد 30 رطلاً في 4 أشهر",
+          transform2Name: "ليزا أندرسون",
+          transform2Desc: "اكتسبت 15 رطلاً من العضلات في 5 أشهر",
+          transform3Name: "ديفيد كيم",
+          transform3Desc: "إعادة تكوين كاملة للجسم في 6 أشهر",
+          footerTitle: "هل أنت مستعد لبدء تحولك؟",
+          footerSubtitle:
+            "انضم إلى مئات العملاء الراضين الذين حققوا أجسام أحلامهم",
+          footerCta: "ابدأ اليوم",
+        },
+      };
+
+      let currentLang = "en";
+
+      // Dark Mode Toggle
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const html = document.documentElement;
+      let isDark = localStorage.getItem("theme") === "dark" ? true : false;
+      html.classList.add(localStorage.getItem("theme"));
+
+      function applyDarkMode(dark) {
+        if (dark) {
+          html.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+        } else {
+          html.classList.remove("dark");
+          localStorage.setItem("theme", "light");
+        }
+        isDark = !dark;
+      }
+
+      darkModeToggle.addEventListener("click", () => {
+        applyDarkMode(isDark);
+      });
+
+      // Language Toggle
+      const langToggle = document.getElementById("langToggle");
+
+      function updateLanguage(lang) {
+        currentLang = lang;
+        const t = translations[lang];
+
+        html.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+        html.setAttribute("lang", lang);
+
+        const navLinks = document.querySelectorAll(".nav-link");
+        navLinks[0].textContent = t.navHome;
+        navLinks[1].textContent = t.navAbout;
+        navLinks[2].textContent = t.navServices;
+        navLinks[3].textContent = t.navTestimonials;
+        navLinks[4].textContent = t.navTransform;
+
+        const mobileNavLinks = document.querySelectorAll(
+          "#mobileMenu .nav-link"
+        );
+        mobileNavLinks[0].textContent = t.navHome;
+        mobileNavLinks[1].textContent = t.navAbout;
+        mobileNavLinks[2].textContent = t.navServices;
+        mobileNavLinks[3].textContent = t.navTestimonials;
+        // mobileNavLinks[4].textContent = t.navTransform;
+
+        langToggle.textContent = t.langBtn;
+
+        document.querySelector(".hero-title").textContent = t.heroTitle;
+        document.querySelector(".hero-subtitle").textContent = t.heroSubtitle;
+        // document.querySelector('.cta-primary').textContent = t.ctaPrimary;
+        // document.querySelector('.cta-secondary').textContent = t.ctaSecondary;
+
+        document.querySelector(".about-title").textContent = t.aboutTitle;
+        document.querySelector(".about-subtitle").textContent = t.aboutSubtitle;
+        const aboutTexts = t.aboutText.split("\n\n");
+        const aboutParagraphs = document.querySelectorAll(".about-text");
+        aboutParagraphs[0].textContent = aboutTexts[0];
+        aboutParagraphs[1].textContent = aboutTexts[1];
+
+        const certs = document.querySelectorAll(".cert");
+        certs[0].textContent = t.cert1;
+        certs[1].textContent = t.cert2;
+
+        document.querySelector(".services-title").textContent = t.servicesTitle;
+        const serviceNames = document.querySelectorAll(".service-name");
+        const serviceDescs = document.querySelectorAll(".service-desc");
+        serviceNames[0].textContent = t.service1Name;
+        serviceDescs[0].textContent = t.service1Desc;
+        serviceNames[1].textContent = t.service2Name;
+        serviceDescs[1].textContent = t.service2Desc;
+        serviceNames[2].textContent = t.service3Name;
+        serviceDescs[2].textContent = t.service3Desc;
+
+        document.querySelector(".testimonials-title").textContent =
+          t.testimonialsTitle;
+        const clientNames = document.querySelectorAll(".client-name");
+        const testimonialTexts = document.querySelectorAll(".testimonial-text");
+        clientNames[0].textContent = t.client1Name;
+        testimonialTexts[0].textContent = t.client1Text;
+        clientNames[1].textContent = t.client2Name;
+        testimonialTexts[1].textContent = t.client2Text;
+        clientNames[2].textContent = t.client3Name;
+        testimonialTexts[2].textContent = t.client3Text;
+        clientNames[3].textContent = t.client4Name;
+        testimonialTexts[3].textContent = t.client4Text;
+
+        // document.querySelector('.transform-title').textContent = t.transformTitle;
+        const beforeLabels = document.querySelectorAll(".before-label");
+        const afterLabels = document.querySelectorAll(".after-label");
+        beforeLabels.forEach((label) => (label.textContent = t.beforeLabel));
+        afterLabels.forEach((label) => (label.textContent = t.afterLabel));
+
+        const transformNames = document.querySelectorAll(".transform-name");
+        const transformDescs = document.querySelectorAll(".transform-desc");
+        // transformNames[0].textContent = t.transform1Name;
+        // transformDescs[0].textContent = t.transform1Desc;
+        // transformNames[1].textContent = t.transform2Name;
+        // transformDescs[1].textContent = t.transform2Desc;
+        // transformNames[2].textContent = t.transform3Name;
+        // transformDescs[2].textContent = t.transform3Desc;
+
+        document.querySelector(".footer-title").textContent = t.footerTitle;
+        document.querySelector(".footer-subtitle").textContent =
+          t.footerSubtitle;
+        document.querySelector(".footer-cta").textContent = t.footerCta;
+      }
+
+      langToggle.addEventListener("click", () => {
+        updateLanguage(currentLang === "en" ? "ar" : "en");
+      });
+
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("active");
+      });
+
+      const mobileNavLinks = document.querySelectorAll("#mobileMenu a");
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("active");
+        });
+      });
+
+      // Testimonial Scroll
+      const testimonialScroll = document.getElementById("testimonialScroll");
+      const scrollLeftBtn = document.getElementById("scrollLeft");
+      const scrollRightBtn = document.getElementById("scrollRight");
+
+      scrollLeftBtn.addEventListener("click", () => {
+        testimonialScroll.scrollBy({ left: -400, behavior: "smooth" });
+      });
+
+      scrollRightBtn.addEventListener("click", () => {
+        testimonialScroll.scrollBy({ left: 400, behavior: "smooth" });
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      // Show/Hide Fixed Social Sidebar on Scroll
+      const socialSidebar = document.getElementById("socialSidebar");
+      const navBar = document.getElementById("navBar");
+      const logoImg = document.getElementById("logo");
+      const socialMobile = document.getElementById("socialMobile");
+
+      window.addEventListener("scroll", () => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY >= 10) {
+          if (localStorage.getItem("theme") === "light") {
+            logoImg.src = "images/dark-logo.png";
+          } else {
+            logoImg.src = "images/logo-removebg-preview.png";
+          }
+          navBar.classList.add(
+            "bg-white/90",
+            "dark:bg-gray-900/90",
+            "backdrop-blur-sm",
+            "shadow-md"
+          );
+          navBar.classList.remove("bg-transparent", "text-white");
         }
 
-        function selectImage(index) {
-            currentImageIndex = index;
-            renderGallery();
+        if (currentScrollY > 400) {
+          socialSidebar.style.opacity = "1";
+          socialMobile.style.opacity = "1";
+        } else if (currentScrollY < 10) {
+          socialSidebar.style.opacity = "0";
+          socialMobile.style.opacity = "0";
+          logoImg.src = "images/logo-removebg-preview.png";
+          navBar.classList.remove(
+            "bg-white/90",
+            "dark:bg-gray-900/90",
+            "backdrop-blur-sm",
+            "shadow-md"
+          );
+          navBar.classList.add("bg-transparent", "text-white");
         }
-
-        function previousImage() {
-            const story = successStories[currentStoryIndex];
-            currentImageIndex = (currentImageIndex - 1 + story.images.length) % story.images.length;
-            renderGallery();
-        }
-
-        function nextImage() {
-            const story = successStories[currentStoryIndex];
-            currentImageIndex = (currentImageIndex + 1) % story.images.length;
-            renderGallery();
-        }
-
-        // Translations
-        const translations = {
-            en: {
-                navHome: 'Home',
-                navAbout: 'About',
-                navServices: 'Services',
-                navTestimonials: 'Testimonials',
-                navTransform: 'Transformations',
-                langBtn: 'عربي',
-                heroTitle: 'Transform Your Body, Transform Your Life',
-                heroSubtitle: 'Achieve your fitness goals with personalized training programs designed just for you',
-                ctaPrimary: 'Start Your Journey',
-                ctaSecondary: 'View Programs',
-                aboutTitle: 'About Me',
-                aboutSubtitle: 'Your Fitness Partner',
-                aboutText: 'With over 10 years of experience in personal training and nutrition, I\'ve helped hundreds of clients achieve their dream bodies and maintain healthy lifestyles.\n\nMy approach combines science-based training methods with personalized nutrition plans to deliver real, sustainable results.',
-                cert1: 'Certified Trainer',
-                cert2: 'Nutrition Specialist',
-                servicesTitle: 'My Services',
-                service1Name: 'Personal Training',
-                service1Desc: 'One-on-one customized workout sessions tailored to your specific goals and fitness level.',
-                service2Name: 'Nutrition Plans',
-                service2Desc: 'Custom meal plans designed to complement your training and accelerate your results.',
-                service3Name: 'Online Coaching',
-                service3Desc: 'Flexible online training programs with regular check-ins and progress tracking.',
-                testimonialsTitle: 'Client Success Stories',
-                client1Name: 'Sarah Johnson',
-                client1Text: '"Amazing results in just 3 months! I\'ve lost 20 pounds and gained so much confidence."',
-                client2Name: 'Mike Chen',
-                client2Text: '"The personalized approach made all the difference. I finally achieved the body I\'ve always wanted!"',
-                client3Name: 'Emma Davis',
-                client3Text: '"Professional, knowledgeable, and motivating. Couldn\'t ask for a better trainer!"',
-                client4Name: 'John Smith',
-                client4Text: '"Life-changing experience! The training and nutrition plans are exactly what I needed."',
-                transformTitle: 'Incredible Transformations',
-                beforeLabel: 'Before',
-                afterLabel: 'After',
-                transform1Name: 'Alex Rodriguez',
-                transform1Desc: 'Lost 30 lbs in 4 months',
-                transform2Name: 'Lisa Anderson',
-                transform2Desc: 'Gained 15 lbs muscle in 5 months',
-                transform3Name: 'David Kim',
-                transform3Desc: 'Complete body recomp in 6 months',
-                footerTitle: 'Ready to Start Your Transformation?',
-                footerSubtitle: 'Join hundreds of satisfied clients who achieved their dream bodies',
-                footerCta: 'Get Started Today'
-            },
-            ar: {
-                navHome: 'الرئيسية',
-                navAbout: 'عني',
-                navServices: 'الخدمات',
-                navTestimonials: 'آراء العملاء',
-                navTransform: 'التحولات',
-                langBtn: 'English',
-                heroTitle: 'حول جسمك، حول حياتك',
-                heroSubtitle: 'حقق أهدافك في اللياقة البدنية مع برامج تدريب مخصصة صممت خصيصاً لك',
-                ctaPrimary: 'ابدأ رحلتك',
-                ctaSecondary: 'عرض البرامج',
-                aboutTitle: 'عني',
-                aboutSubtitle: 'شريكك في اللياقة',
-                aboutText: 'مع خبرة تزيد عن 10 سنوات في التدريب الشخصي والتغذية، ساعدت المئات من العملاء على تحقيق أجسام أحلامهم والحفاظ على أنماط حياة صحية.\n\nيجمع نهجي بين أساليب التدريب القائمة على العلم وخطط التغذية الشخصية لتقديم نتائج حقيقية ومستدامة.',
-                cert1: 'مدرب معتمد',
-                cert2: 'أخصائي تغذية',
-                servicesTitle: 'خدماتي',
-                service1Name: 'التدريب الشخصي',
-                service1Desc: 'جلسات تمرين مخصصة فردية مصممة خصيصاً لأهدافك ومستوى لياقتك.',
-                service2Name: 'خطط التغذية',
-                service2Desc: 'خطط وجبات مخصصة مصممة لتكمل تدريبك وتسريع نتائجك.',
-                service3Name: 'التدريب عبر الإنترنت',
-                service3Desc: 'برامج تدريب مرنة عبر الإنترنت مع متابعة منتظمة وتتبع التقدم.',
-                testimonialsTitle: 'قصص نجاح العملاء',
-                client1Name: 'سارة جونسون',
-                client1Text: '"نتائج مذهلة في 3 أشهر فقط! فقدت 20 رطلاً واكتسبت الكثير من الثقة."',
-                client2Name: 'مايك تشين',
-                client2Text: '"النهج الشخصي أحدث كل الفرق. أخيراً حققت الجسم الذي طالما أردته!"',
-                client3Name: 'إيما ديفيس',
-                client3Text: '"محترف، واسع المعرفة، ومحفز. لا يمكن أن أطلب مدرباً أفضل!"',
-                client4Name: 'جون سميث',
-                client4Text: '"تجربة غيرت حياتي! خطط التدريب والتغذية هي بالضبط ما احتجته."',
-                transformTitle: 'تحولات مذهلة',
-                beforeLabel: 'قبل',
-                afterLabel: 'بعد',
-                transform1Name: 'أليكس رودريجيز',
-                transform1Desc: 'فقد 30 رطلاً في 4 أشهر',
-                transform2Name: 'ليزا أندرسون',
-                transform2Desc: 'اكتسبت 15 رطلاً من العضلات في 5 أشهر',
-                transform3Name: 'ديفيد كيم',
-                transform3Desc: 'إعادة تكوين كاملة للجسم في 6 أشهر',
-                footerTitle: 'هل أنت مستعد لبدء تحولك؟',
-                footerSubtitle: 'انضم إلى مئات العملاء الراضين الذين حققوا أجسام أحلامهم',
-                footerCta: 'ابدأ اليوم'
-            }
-        };
-
-        let currentLang = 'en';
-
-        // Dark Mode Toggle
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const html = document.documentElement;
-        let isDark = localStorage.getItem('theme') === 'dark' ? true : false;
-        html.classList.add(localStorage.getItem('theme'));
-
-        function applyDarkMode(dark) { 
-            if (dark) {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            }
-            isDark = !dark;
-        }
-
-        darkModeToggle.addEventListener('click', () => {          
-            applyDarkMode(isDark);
-        });
-
-        // Language Toggle
-        const langToggle = document.getElementById('langToggle');
-        
-        function updateLanguage(lang) {
-            currentLang = lang;
-            const t = translations[lang];
-            
-            html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-            html.setAttribute('lang', lang);
-            
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks[0].textContent = t.navHome;
-            navLinks[1].textContent = t.navAbout;
-            navLinks[2].textContent = t.navServices;
-            navLinks[3].textContent = t.navTestimonials;
-            navLinks[4].textContent = t.navTransform;
-            
-            const mobileNavLinks = document.querySelectorAll('#mobileMenu .nav-link');
-            mobileNavLinks[0].textContent = t.navHome;
-            mobileNavLinks[1].textContent = t.navAbout;
-            mobileNavLinks[2].textContent = t.navServices;
-            mobileNavLinks[3].textContent = t.navTestimonials;
-            // mobileNavLinks[4].textContent = t.navTransform;
-            
-            langToggle.textContent = t.langBtn;
-            
-            document.querySelector('.hero-title').textContent = t.heroTitle;
-            document.querySelector('.hero-subtitle').textContent = t.heroSubtitle;
-            // document.querySelector('.cta-primary').textContent = t.ctaPrimary;
-            // document.querySelector('.cta-secondary').textContent = t.ctaSecondary;
-            
-            document.querySelector('.about-title').textContent = t.aboutTitle;
-            document.querySelector('.about-subtitle').textContent = t.aboutSubtitle;
-            const aboutTexts = t.aboutText.split('\n\n');
-            const aboutParagraphs = document.querySelectorAll('.about-text');
-            aboutParagraphs[0].textContent = aboutTexts[0];
-            aboutParagraphs[1].textContent = aboutTexts[1];
-            
-            const certs = document.querySelectorAll('.cert');
-            certs[0].textContent = t.cert1;
-            certs[1].textContent = t.cert2;
-            
-            document.querySelector('.services-title').textContent = t.servicesTitle;
-            const serviceNames = document.querySelectorAll('.service-name');
-            const serviceDescs = document.querySelectorAll('.service-desc');
-            serviceNames[0].textContent = t.service1Name;
-            serviceDescs[0].textContent = t.service1Desc;
-            serviceNames[1].textContent = t.service2Name;
-            serviceDescs[1].textContent = t.service2Desc;
-            serviceNames[2].textContent = t.service3Name;
-            serviceDescs[2].textContent = t.service3Desc;
-            
-            document.querySelector('.testimonials-title').textContent = t.testimonialsTitle;
-            const clientNames = document.querySelectorAll('.client-name');
-            const testimonialTexts = document.querySelectorAll('.testimonial-text');
-            clientNames[0].textContent = t.client1Name;
-            testimonialTexts[0].textContent = t.client1Text;
-            clientNames[1].textContent = t.client2Name;
-            testimonialTexts[1].textContent = t.client2Text;
-            clientNames[2].textContent = t.client3Name;
-            testimonialTexts[2].textContent = t.client3Text;
-            clientNames[3].textContent = t.client4Name;
-            testimonialTexts[3].textContent = t.client4Text;
-            
-            // document.querySelector('.transform-title').textContent = t.transformTitle;
-            const beforeLabels = document.querySelectorAll('.before-label');
-            const afterLabels = document.querySelectorAll('.after-label');
-            beforeLabels.forEach(label => label.textContent = t.beforeLabel);
-            afterLabels.forEach(label => label.textContent = t.afterLabel);
-            
-            const transformNames = document.querySelectorAll('.transform-name');
-            const transformDescs = document.querySelectorAll('.transform-desc');
-            // transformNames[0].textContent = t.transform1Name;
-            // transformDescs[0].textContent = t.transform1Desc;
-            // transformNames[1].textContent = t.transform2Name;
-            // transformDescs[1].textContent = t.transform2Desc;
-            // transformNames[2].textContent = t.transform3Name;
-            // transformDescs[2].textContent = t.transform3Desc;
-            
-            document.querySelector('.footer-title').textContent = t.footerTitle;
-            document.querySelector('.footer-subtitle').textContent = t.footerSubtitle;
-            document.querySelector('.footer-cta').textContent = t.footerCta;
-        }
-
-        langToggle.addEventListener('click', () => {
-            updateLanguage(currentLang === 'en' ? 'ar' : 'en');
-        });
-
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-
-        const mobileNavLinks = document.querySelectorAll('#mobileMenu a');
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-            });
-        });
-
-        // Testimonial Scroll
-        const testimonialScroll = document.getElementById('testimonialScroll');
-        const scrollLeftBtn = document.getElementById('scrollLeft');
-        const scrollRightBtn = document.getElementById('scrollRight');
-
-        scrollLeftBtn.addEventListener('click', () => {
-            testimonialScroll.scrollBy({ left: -400, behavior: 'smooth' });
-        });
-
-        scrollRightBtn.addEventListener('click', () => {
-            testimonialScroll.scrollBy({ left: 400, behavior: 'smooth' });
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Show/Hide Fixed Social Sidebar on Scroll
-        const socialSidebar = document.getElementById('socialSidebar');
-        const navBar = document.getElementById('navBar');
-        const logoImg = document.getElementById('logo');
-        const socialMobile = document.getElementById('socialMobile');
-
-        window.addEventListener('scroll', () => {
-            const currentScrollY = window.scrollY;      
-                       
-            if(currentScrollY >= 10){                
-                if(localStorage.getItem('theme') === 'light') {
-                     logoImg.src = 'images/dark-logo.png';
-                } else {
-                     logoImg.src = 'images/logo-removebg-preview.png';
-                }
-                navBar.classList.add('bg-white/90', 'dark:bg-gray-900/90', 'backdrop-blur-sm', 'shadow-md');
-                navBar.classList.remove('bg-transparent', 'text-white');
-            } 
-            
-            if (currentScrollY > 400) {
-                socialSidebar.style.opacity = '1';
-                socialMobile.style.opacity = '1';
-            } else if(currentScrollY < 10) {
-                socialSidebar.style.opacity = '0';
-                socialMobile.style.opacity = '0';
-                logoImg.src = 'images/logo-removebg-preview.png';
-                navBar.classList.remove('bg-white/90', 'dark:bg-gray-900/90', 'backdrop-blur-sm', 'shadow-md');
-                navBar.classList.add('bg-transparent' , 'text-white');
-            }
-        });
+      });
     </script>
-</body>
+  </body>
 </html>
