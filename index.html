@@ -105,8 +105,8 @@
       id="socialSidebar"
       class="hidden md:block fixed md:z-50 md:left-auto md:right-6 md:top-1/2 md:-translate-y-1/2 md:-translate-x-0 transition-opacity duration-300 opacity-0"
     >
-      <div class="flex md:flex-col gap-4">
-        <a href="https://wa.me/2001020866054" target="_blank" class="w-12 h-12 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition">
+      <div flex md:flex-col gap-4">
+        <a onclick="redirectToWhatsApp()" href="" target="_blank" class="w-12 h-12 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition">
           <svg class="w-6 h-6" fill="currentColor"><use href="#i-wa" /></svg>
         </a>
         <a href="https://www.instagram.com/coach_assaff_?rpxt=NHUzOWFrZ3B6Ymk4&utm_source=qr" target="_blank" class="w-12 h-12 bg-pink-500 hover:bg-pink-600 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition">
@@ -117,11 +117,12 @@
 
     <!-- Mobile floating CTA -->
     <div
+    onclick="redirectToWhatsApp()"
       id="socialMobile"
       class="md:hidden opacity-0 transition delay-150 duration-300 ease-in-out fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-3xl"
     >
       <a
-        href="https://wa.me/2001020866054"
+        href=""
         target="_blank"
         class="flex justify-center items-center m-auto w-full px-8 py-4 bg-primary-500 text-white font-bold text-sm sm:text-lg hover:bg-primary-800 transform hover:scale-105 transition rounded-2xl"
       >
@@ -150,8 +151,8 @@
           </div>
 
           <!-- Social Links in Hero -->
-          <div class="flex gap-6 justify-center items-center my-5">
-            <a href="https://wa.me/2001020866054" target="_blank" class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transform hover:scale-110 transition">
+          <div onclick="redirectToWhatsApp()" class="flex gap-6 justify-center items-center my-5">
+            <a href="" target="_blank" class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transform hover:scale-110 transition">
               <svg class="w-7 h-7" fill="currentColor"><use href="#i-wa" /></svg>
             </a>
             <a href="https://www.instagram.com/coach_assaff_?rpxt=NHUzOWFrZ3B6Ymk4&utm_source=qr" target="_blank" class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transform hover:scale-110 transition">
@@ -359,7 +360,7 @@
         <p class="text-xl mb-8 footer-subtitle">
           Join hundreds of satisfied clients who achieved their dream bodies
         </p>
-        <button class="px-8 py-4 bg-white text-primary-500 rounded-lg font-bold text-lg hover:bg-gray-100 transform hover:scale-105 transition footer-cta">
+        <button onclick="redirectToWhatsApp()" class="px-8 py-4 bg-white text-primary-500 rounded-lg font-bold text-lg hover:bg-gray-100 transform hover:scale-105 transition footer-cta">
           Get Started Today
         </button>
       </div>
@@ -477,24 +478,23 @@
         });
 
         langToggle.textContent = t.langBtn;
-
         document.querySelector(".hero-title").textContent = t.heroTitle;
         document.querySelector(".hero-subtitle").textContent = t.heroSubtitle;
-
+        
         document.querySelector(".about-title").textContent = t.aboutTitle;
         document.querySelector(".about-subtitle").textContent = t.aboutSubtitle;
         const aboutTexts = t.aboutText.split("\n\n");
         const aboutParagraphs = document.querySelectorAll(".about-text");
         aboutParagraphs[0].textContent = aboutTexts[0];
         aboutParagraphs[1].textContent = aboutTexts[1];
-
+        
         const certs = document.querySelectorAll(".cert");
         certs[0].textContent = t.cert1;
         certs[1].textContent = t.cert2;
         certs[2].textContent = t.cert3;
         certs[3].textContent = t.cert4;
         certs[4].textContent = t.cert5;
-
+        
         document.querySelector(".services-title").textContent = t.servicesTitle;
         const serviceNames = document.querySelectorAll(".service-name");
         const serviceDescs = document.querySelectorAll(".service-desc");
@@ -506,33 +506,44 @@
         serviceDescs[2].textContent = t.service3Desc;
         serviceNames[3].textContent = t.service4Name;
         serviceDescs[3].textContent = t.service4Desc;
-
+        
         document.querySelector(".testimonials-title").textContent =
-          t.testimonialsTitle;
-
+        t.testimonialsTitle;
+        
         document.querySelector(".footer-title").textContent = t.footerTitle;
         document.querySelector(".footer-subtitle").textContent = t.footerSubtitle;
         document.querySelectorAll(".footer-cta").forEach((el) => {
           el.textContent = t.footerCta;
         });
       }
-
+      
       langToggle.addEventListener("click", () => {
         updateLanguage(currentLang === "en" ? "ar" : "en");
       });
-
+      
       // ---------- Mobile Menu ----------
       const mobileMenuBtn = document.getElementById("mobileMenuBtn");
       const mobileMenu = document.getElementById("mobileMenu");
-
+      
       mobileMenuBtn.addEventListener("click", () => {
         mobileMenu.classList.toggle("active");
       });
-
+      
       document.querySelectorAll("#mobileMenu a").forEach((link) => {
         link.addEventListener("click", () => mobileMenu.classList.remove("active"));
       });
+      
 
+      redirectToWhatsApp = () => {
+        
+        const message =
+          currentLang === "ar"
+            ? "مرحبا، أود معرفة المزيد عن خدماتك"
+            : "Hello, I would like to know more about your services";
+
+        window.open(`https://wa.me/2001020866054?text=${encodeURIComponent(message)}`, "_blank");
+      };
+     
       // ---------- Client Success Stories Carousel ----------
       const storiesTrack = document.getElementById("storiesTrack");
       const storiesViewport = document.getElementById("storiesViewport");
